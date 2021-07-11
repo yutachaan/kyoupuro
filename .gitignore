@@ -1,0 +1,11 @@
+# VSCode
+.vscode/*
+*.code-workspace
+.history/
+
+# MacOS
+.DS_Store
+Icon
+._*
+.Trashes
+
