@@ -1,4 +1,5 @@
 // AC
+// char型による条件分岐
 #include <bits/stdc++.h>
 
 using namespace std;

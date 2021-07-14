@@ -1,4 +1,5 @@
 // AC
+// キャストと浮動小数点数の桁数指定出力
 #include <bits/stdc++.h>
 
 using namespace std;

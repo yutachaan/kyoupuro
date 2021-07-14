@@ -1,5 +1,5 @@
 // AC
-
+// 累乗の計算
 #include <bits/stdc++.h>
 
 using namespace std;

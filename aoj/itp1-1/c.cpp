@@ -1,4 +1,5 @@
 // AC
+// 長方形の面積と周の長さ
 #include <bits/stdc++.h>
 
 using namespace std;

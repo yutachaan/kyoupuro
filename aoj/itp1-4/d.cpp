@@ -1,4 +1,5 @@
 // AC
+// 1行にN個の入力データがある場合の，それらの最小値，最大値，合計
 #include <bits/stdc++.h>
 
 using namespace std;

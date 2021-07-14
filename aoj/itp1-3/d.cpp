@@ -1,4 +1,5 @@
 // AC
+// 約数の個数
 #include <bits/stdc++.h>
 
 using namespace std;

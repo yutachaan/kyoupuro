@@ -1,4 +1,5 @@
 // AC
+// 長方形の中に円が収まっているかの判定
 #include <bits/stdc++.h>
 
 using namespace std;
