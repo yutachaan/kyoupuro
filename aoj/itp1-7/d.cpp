@@ -9,12 +9,13 @@ int main() {
   cin >> n >> m >> l;
 
   long long int A[n][m], B[m][l], C[n][l];
+
+  // 初期化
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < m; j++) {
       cin >> A[i][j];
     }
   }
-
   for (int i = 0; i < m; i++) {
     for (int j = 0; j < l; j++) {
       cin >> B[i][j];
@@ -23,13 +24,14 @@ int main() {
 
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < l; j++) {
-      C[i][j] = 0;
+      C[i][j] = 0;                    // 初期化
       for (int k = 0; k < m; k++) {
-        C[i][j] += A[i][k] * B[k][j];
+        C[i][j] += A[i][k] * B[k][j]; // 演算
       }
     }
   }
 
+  // 出力
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < l - 1; j++) {
       cout << C[i][j] << ' ';

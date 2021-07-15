@@ -13,15 +13,15 @@ int main() {
     if ((n == 0) && (x == 0)) break;
 
     count = 0;
-    bool a[n] = {false};
-    fill(a, a + 3, true);
+    bool a[n];
+    for (int i = 0; i < n; i++) a[i] = false;
 
+    // 組み合わせ
+    fill(a, a + 3, true);
     do {
       temp = 0;
       for (int i = 0; i < n; i++) {
-          if (a[i]) {
-              temp += i + 1;
-          }
+        if (a[i]) temp += i + 1;
       }
 
       if (temp == x) count++;

@@ -8,9 +8,7 @@ int main() {
   int x;
   cin >> x;
 
-  int ans = pow(x, 3);
-
-  cout << ans << endl;
+  cout << x * x * x << endl;
 
   return 0;
 }

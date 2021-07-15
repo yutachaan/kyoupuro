@@ -5,24 +5,32 @@
 using namespace std;
 
 int main() {
-  int trump[4][13] = {0};
   int n, rank;
   char pattern;
+  bool trump[4][13];
+
+  // 初期化
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 13; j++) {
+      trump[i][j] = false;
+    }
+  }
 
   cin >> n;
 
   for (int i = 0; i < n; i++) {
     cin >> pattern >> rank;
 
-    if (pattern == 'S') trump[0][rank - 1] = 1;
-    else if (pattern == 'H') trump[1][rank - 1] = 1;
-    else if (pattern == 'C') trump[2][rank - 1] = 1;
-    else if (pattern == 'D') trump[3][rank - 1] = 1;
+    // 持っている場合true
+    if (pattern == 'S') trump[0][rank - 1] = true;
+    else if (pattern == 'H') trump[1][rank - 1] = true;
+    else if (pattern == 'C') trump[2][rank - 1] = true;
+    else if (pattern == 'D') trump[3][rank - 1] = true;
   }
 
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 13; j++) {
-      if (trump[i][j] == 0) {
+      if (!trump[i][j]) {
         if (i == 0) cout << "S " << j + 1 << endl;
         else if (i == 1) cout << "H " << j + 1 << endl;
         else if (i == 2) cout << "C " << j + 1 << endl;

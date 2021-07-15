@@ -9,9 +9,7 @@ int main() {
   cin >> n;
 
   int a[n];
-  for (int i = 0; i < n; i++) {
-    cin >> a[i];
-  }
+  for (int i = 0; i < n; i++) cin >> a[i];
 
   int min = *min_element(a, a + n);
   int max = *max_element(a, a + n);
