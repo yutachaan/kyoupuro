@@ -7,14 +7,14 @@ D: 行列と行列の積
 
 ## TIL
 ### 配列の初期化
-```
+```cpp
 bool a[n] = {false};
 fill(a, a + n, true);
 ```
 
 ### 組み合わせ
 n個からr個取り出す時の組み合わせの列挙
-```
+```cpp
 bool a[n] = {false};
 fill(a, a + r, true);
 do {

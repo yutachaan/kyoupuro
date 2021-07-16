@@ -12,7 +12,7 @@ printfで出力する．double型の場合の出力変換指定子は`%lf`
 ### 円周率はM_PI
 
 ### 1行の複数データ読み込み
-```
+```cpp
 int a[n];
 for (int i = 0; i < n; i++) {
   cin >> a[i];
