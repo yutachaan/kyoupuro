@@ -13,7 +13,7 @@ fill(a, a + n, true);
 ```
 
 ### 組み合わせ
-n個からr個とりさす時の組み合わせの列挙
+n個からr個取り出す時の組み合わせの列挙
 ```
 bool a[n] = {false};
 fill(a, a + r, true);
