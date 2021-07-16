@@ -5,9 +5,8 @@
 using namespace std;
 
 int main() {
-  int m, f, r;
-
   while (true) {
+    int m, f, r;
     cin >> m >> f >> r;
 
     if ((m == -1) && (f == -1) && (r == -1)) break;

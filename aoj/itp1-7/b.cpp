@@ -5,21 +5,20 @@
 using namespace std;
 
 int main() {
-  int n, x, count, temp;
-
   while (true) {
+    int n, x;
     cin >> n >> x;
 
     if ((n == 0) && (x == 0)) break;
 
-    count = 0;
+    int count = 0;
     bool a[n];
     for (int i = 0; i < n; i++) a[i] = false;
 
     // 組み合わせ
     fill(a, a + 3, true);
     do {
-      temp = 0;
+      int temp = 0;
       for (int i = 0; i < n; i++) {
         if (a[i]) temp += i + 1;
       }

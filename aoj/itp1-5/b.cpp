@@ -5,9 +5,9 @@
 using namespace std;
 
 int main() {
-  int H, W;
 
   while (true) {
+    int H, W;
     cin >> H >> W;
 
     if ((H == 0) && (W == 0)) break;

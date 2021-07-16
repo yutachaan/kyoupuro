@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-  int n, x;
+  int n;
   cin >> n;
 
   for (int i = 1; i <= n; i++) {
@@ -14,7 +14,7 @@ int main() {
       continue;
     }
 
-    x = i;
+    int x = i;
     while (x != 0) {
       if (x % 10 == 3) {
         cout << ' ' << i;

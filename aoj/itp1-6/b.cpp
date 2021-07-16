@@ -5,20 +5,20 @@
 using namespace std;
 
 int main() {
-  int n, rank;
-  char pattern;
-  bool trump[4][13];
+  int n;
+  cin >> n;
 
   // 初期化
+  bool trump[4][13];
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 13; j++) {
       trump[i][j] = false;
     }
   }
 
-  cin >> n;
-
   for (int i = 0; i < n; i++) {
+    int rank;
+    char pattern;
     cin >> pattern >> rank;
 
     // 持っている場合true

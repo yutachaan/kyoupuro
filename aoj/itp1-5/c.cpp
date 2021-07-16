@@ -5,16 +5,13 @@
 using namespace std;
 
 int main() {
-  int H, W;
-  string s, t;
-
   while (true) {
+    int H, W;
     cin >> H >> W;
 
     if ((H == 0) && (W == 0)) break;
 
-    s = "";
-    t = "";
+    string s = "", t = "";
     for (int i = 0; i < W / 2; i++) {
       s += "#.";
       t += ".#";

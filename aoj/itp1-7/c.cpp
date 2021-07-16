@@ -8,9 +8,8 @@ int main() {
   int r, c;
   cin >> r >> c;
 
-  int table[r + 1][c + 1];
-
   // 初期化
+  int table[r + 1][c + 1];
   for (int i = 0; i < r + 1; i++) {
     for (int j = 0; j < c + 1; j++) {
       table[i][j] = 0;

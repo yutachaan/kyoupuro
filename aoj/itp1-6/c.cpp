@@ -5,10 +5,11 @@
 using namespace std;
 
 int main() {
-  int n, b, f, r, v;
-  int house[4][3][10];
+  int n;
+  cin >> n;
 
   // 初期化
+  int house[4][3][10];
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 3; j++) {
       for (int k = 0; k < 10; k++) {
@@ -17,10 +18,9 @@ int main() {
     }
   }
 
-  cin >> n;
-
   // カウント
   for (int i = 0; i < n; i++) {
+    int b, f, r, v;
     cin >> b >> f >> r >> v;
 
     house[b - 1][f - 1][r - 1] += v;

@@ -5,9 +5,8 @@
 using namespace std;
 
 int main() {
-  char c;
-
   while (true) {
+    char c;
     scanf("%c", &c);
 
     if (c == '\n') break;
