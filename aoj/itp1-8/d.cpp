@@ -19,7 +19,7 @@ int main() {
       int start = i % s.size();                  // 初めのインデックス
       int end = (i + (p.size() - 1)) % s.size(); // 終わりのインデックス
 
-      if (s.substr(start, s.size() - 1) + s.substr(0, end + 1) == p) {
+      if (s.substr(start) + s.substr(0, end + 1) == p) {
         cout << "Yes" << endl;
         break;
       }
