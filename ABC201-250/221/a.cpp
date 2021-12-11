@@ -1,3 +1,4 @@
+// AC
 // 指数計算
 #include <bits/stdc++.h>
 

@@ -1,3 +1,4 @@
+// AC
 // 条件分岐
 #include <bits/stdc++.h>
 

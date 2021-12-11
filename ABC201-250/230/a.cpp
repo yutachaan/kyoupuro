@@ -1,3 +1,4 @@
+// AC
 // ゼロ埋め
 #include <bits/stdc++.h>
 

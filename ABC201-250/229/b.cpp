@@ -1,3 +1,4 @@
+// AC
 // 繰り上がりがあるか
 #include <bits/stdc++.h>
 
