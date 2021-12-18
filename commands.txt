@@ -1,0 +1,14 @@
+コンテスト開始時
+atcoder-tools gen abc... --workspace ./ABC201-250
+→ コンテスト環境用意(ディレクトリ作成，テンプレートファイル，in-out DL)
+
+コードをコンパイル(カレントディレクトリで)
+atcoder-tools compile
+
+コードをテスト(カレントディレクトリ上にin, outがあれば)
+atcoder-tools test
+
+コードを提出(カレントディレクトリで)
+atcoder-tools submit
+
+
