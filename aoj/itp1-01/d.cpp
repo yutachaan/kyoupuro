@@ -1,5 +1,3 @@
-// AC
-// 秒→h:m:s
 #include <bits/stdc++.h>
 
 using namespace std;

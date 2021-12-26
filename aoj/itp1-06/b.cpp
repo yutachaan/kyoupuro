@@ -1,5 +1,3 @@
-// AC
-// 二次元配列を用いた不足しているトランプカードの発見
 #include <bits/stdc++.h>
 
 using namespace std;

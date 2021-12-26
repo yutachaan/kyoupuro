@@ -1,5 +1,3 @@
-// AC
-// 2点間の距離
 #include <bits/stdc++.h>
 
 using namespace std;

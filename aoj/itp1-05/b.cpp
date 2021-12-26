@@ -1,5 +1,3 @@
-// AC
-// 枠の出力
 #include <bits/stdc++.h>
 
 using namespace std;

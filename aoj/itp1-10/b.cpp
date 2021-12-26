@@ -1,5 +1,3 @@
-// AC
-// 三角形の２辺a,bとその間の角Cから，面積S，周の長さL，aを底辺としたときの高さhを求める
 #include <bits/stdc++.h>
 
 using namespace std;

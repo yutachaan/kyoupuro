@@ -1,5 +1,3 @@
-// AC
-// 授業成績の出力
 #include <bits/stdc++.h>
 
 using namespace std;

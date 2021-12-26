@@ -1,5 +1,3 @@
-// AC
-// 数列を逆順に出力
 #include <bits/stdc++.h>
 
 using namespace std;

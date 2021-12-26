@@ -1,5 +1,3 @@
-// AC
-// 行列と列ベクトルの積
 #include <bits/stdc++.h>
 
 using namespace std;

@@ -1,5 +1,3 @@
-// AC
-// 整数のソート
 #include <bits/stdc++.h>
 
 using namespace std;

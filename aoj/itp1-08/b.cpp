@@ -1,5 +1,3 @@
-// AC
-// 数字の各桁の和の計算
 #include <bits/stdc++.h>
 
 using namespace std;

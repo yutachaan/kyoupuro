@@ -1,5 +1,3 @@
-// AC
-// ミンコフスキー距離
 #include <bits/stdc++.h>
 
 using namespace std;

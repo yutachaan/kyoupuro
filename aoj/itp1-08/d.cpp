@@ -1,5 +1,3 @@
-// AC
-// リング状の文字列sに文字列pが含まれるか判定
 #include <bits/stdc++.h>
 
 using namespace std;

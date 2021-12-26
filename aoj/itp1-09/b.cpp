@@ -1,5 +1,3 @@
-// AC
-// 1つの単語をシャッフル(きる)
 #include <bits/stdc++.h>
 
 using namespace std;

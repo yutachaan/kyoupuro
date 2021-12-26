@@ -1,5 +1,3 @@
-// AC
-// 部分文字列の出力，リバース，置換
 #include <bits/stdc++.h>
 
 using namespace std;

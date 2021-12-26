@@ -1,5 +1,3 @@
-// AC
-// 3つの整数の大小比較
 #include <bits/stdc++.h>
 
 using namespace std;

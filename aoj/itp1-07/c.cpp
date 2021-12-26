@@ -1,5 +1,3 @@
-// AC
-// 表の行と列それぞれの和
 #include <bits/stdc++.h>
 
 using namespace std;

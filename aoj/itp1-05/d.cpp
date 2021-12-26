@@ -1,5 +1,3 @@
-// AC
-// 1〜nまでで，3の倍数と3が含まれる数を出力
 #include <bits/stdc++.h>
 
 using namespace std;

@@ -1,5 +1,3 @@
-// AC
-// 文字列の辞書順比較を用いたカードゲーム
 #include <bits/stdc++.h>
 
 using namespace std;

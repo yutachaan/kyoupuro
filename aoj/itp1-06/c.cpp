@@ -1,5 +1,3 @@
-// AC
-// 三次元配列を用いた公舎の入居者数の管理
 #include <bits/stdc++.h>
 
 using namespace std;

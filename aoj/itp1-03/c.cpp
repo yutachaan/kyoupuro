@@ -1,5 +1,3 @@
-// AC
-// 複数行の入力データの読み込み(一行のデータ数2)
 #include <bits/stdc++.h>
 
 using namespace std;

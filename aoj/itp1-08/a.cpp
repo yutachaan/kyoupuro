@@ -1,5 +1,3 @@
-// AC
-// 大文字と小文字の入れ替え
 #include <bits/stdc++.h>
 
 using namespace std;

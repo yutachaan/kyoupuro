@@ -1,5 +1,3 @@
-// AC
-// 1からnまでで和がxとなる組み合わせ
 #include <bits/stdc++.h>
 
 using namespace std;

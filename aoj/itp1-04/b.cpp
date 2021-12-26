@@ -1,5 +1,3 @@
-// AC
-// 円の面積と円周
 #include <bits/stdc++.h>
 
 using namespace std;

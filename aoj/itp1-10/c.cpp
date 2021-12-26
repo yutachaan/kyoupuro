@@ -1,5 +1,3 @@
-// AC
-// 標準偏差
 #include <bits/stdc++.h>
 
 using namespace std;

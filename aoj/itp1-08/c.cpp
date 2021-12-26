@@ -1,5 +1,3 @@
-// AC
-// 英文に含まれる各アルファベットの数のカウント
 #include <bits/stdc++.h>
 
 using namespace std;

@@ -1,5 +1,3 @@
-// AC
-// 文章にある単語が何個含まれているか
 #include <bits/stdc++.h>
 
 using namespace std;
