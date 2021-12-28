@@ -13,6 +13,8 @@ using vs  = vector<string>;
 using pii = pair<int, int>;
 using mii = map<int, int>;
 using msi = map<string, int>;
+using si  = set<int>;
+using ss  = set<string>;
 
 // <----- REPマクロ ----->
 #define FOR(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
@@ -32,8 +34,16 @@ using msi = map<string, int>;
 #define YesNo(n) cout << ((n) ? "Yes" : "No") << endl
 
 // <----- function ----->
-template <class T> bool chmin(T& a, const T& b) {if (a > b) a = b; return a > b;}
-template <class T> bool chmax(T& a, const T& b) {if (a < b) a = b; return a < b;}
+template <typename T>
+bool chmax(T &a, const T& b) {
+  if (a < b) {a = b; return true;}
+  return false;
+}
+template <typename T>
+bool chmin(T &a, const T& b) {
+  if (a > b) {a = b; return true;}
+  return false;
+}
 
 // <----- other ----->
 const int dx[4] = {1, 0, -1, 0};
