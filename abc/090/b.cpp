@@ -51,13 +51,16 @@ const int dy[4] = {0, 1, 0, -1};
 
 
 int main() {
-  int n;
-  cin >> n;
+  int a, b;
+  cin >> a >> b;
 
-  bool ok = false;
-  REP(i, 26) REP(j, 15) if (4 * i + 7 * j == n) ok = true;
+  int ans = 0;
+  FOR(i, a, b + 1) {
+    string si = to_string(i);
+    if ((si[0] == si[4]) and (si[1] == si[3])) ans++;
+  }
 
-  YesNo(ok);
+  cout << ans << endl;
 
   return 0;
 }

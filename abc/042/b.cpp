@@ -51,13 +51,17 @@ const int dy[4] = {0, 1, 0, -1};
 
 
 int main() {
-  int n;
-  cin >> n;
+  int n, l;
+  cin >> n >> l;
 
-  bool ok = false;
-  REP(i, 26) REP(j, 15) if (4 * i + 7 * j == n) ok = true;
+  vs s(n);
+  REP(i, n) cin >> s[i];
+  sort(ALL(s));
 
-  YesNo(ok);
+  string ans = "";
+  REP(i, n) ans += s[i];
+
+  cout << ans << endl;
 
   return 0;
 }

@@ -54,10 +54,15 @@ int main() {
   int n;
   cin >> n;
 
-  bool ok = false;
-  REP(i, 26) REP(j, 15) if (4 * i + 7 * j == n) ok = true;
+  vi a(3 * n);
+  REP(i, 3 * n) cin >> a[i];
+  sort(ALL(a));
 
-  YesNo(ok);
+  ll ans = 0;
+  // 最初のn人を各グループの最弱マンにして，残りは2番目に強い人，最強の人，2番目に強い人，，，と交互に割り当てるのがよい
+  for (int i = n; i < 3 * n; i += 2) ans += a[i];
+
+  cout << ans << endl;
 
   return 0;
 }

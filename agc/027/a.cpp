@@ -51,13 +51,27 @@ const int dy[4] = {0, 1, 0, -1};
 
 
 int main() {
-  int n;
-  cin >> n;
+  int n, x;
+  cin >> n >> x;
 
-  bool ok = false;
-  REP(i, 26) REP(j, 15) if (4 * i + 7 * j == n) ok = true;
+  vi a(n);
+  REP(i, n) cin >> a[i];
+  sort(ALL(a));
 
-  YesNo(ok);
+  int ans = 0;
+  REP(i, n - 1) {
+    // 最後から2番目の人までは，希望量を渡せるなら渡す．渡せないならbreak
+    if (x - a[i] >= 0) {
+      x -= a[i];
+      ans++;
+    }
+    else break;
+  }
+
+  // 最後の人に全部押し付けずに希望量だけ与えられるかどうか
+  if (x  - a[n - 1] == 0) ans++;
+
+  cout << ans << endl;
 
   return 0;
 }

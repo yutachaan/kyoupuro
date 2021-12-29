@@ -55,7 +55,7 @@ int main() {
   cin >> n;
 
   bool ok = false;
-  REP(i, 26) REP(j, 15) if (4 * i + 7 * j == n) ok = true;
+  REPS(i, 9) REPS(j, 9) if (i * j == n) ok = true;
 
   YesNo(ok);
 

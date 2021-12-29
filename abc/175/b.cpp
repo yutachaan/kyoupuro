@@ -54,10 +54,17 @@ int main() {
   int n;
   cin >> n;
 
-  bool ok = false;
-  REP(i, 26) REP(j, 15) if (4 * i + 7 * j == n) ok = true;
+  vi L(n);
+  REP(i, n) cin >> L[i];
 
-  YesNo(ok);
+  int ans = 0;
+  REP(i, n) FOR(j, i + 1, n) FOR(k, j + 1, n) {
+    if ((L[i] == L[j]) or (L[j] == L[k]) or L[k] == L[i]) continue;
+
+    if ((L[i] + L[j] > L[k]) and (L[j] + L[k] > L[i]) and (L[k] + L[i] > L[j])) ans++;
+  }
+
+  cout << ans << endl;
 
   return 0;
 }

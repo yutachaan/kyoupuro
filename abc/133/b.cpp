@@ -51,13 +51,22 @@ const int dy[4] = {0, 1, 0, -1};
 
 
 int main() {
-  int n;
-  cin >> n;
+  int n, d;
+  cin >> n >> d;
 
-  bool ok = false;
-  REP(i, 26) REP(j, 15) if (4 * i + 7 * j == n) ok = true;
+  vvi pos(n, vi(d));
+  REP(i, n) REP(k, d) cin >> pos[i][k];
 
-  YesNo(ok);
+  int ans = 0;
+  REP(i, n) FOR(j, i + 1, n) {
+    double distance = 0;
+    REP(k, d) distance += pow(pos[i][k] - pos[j][k], 2);
+    distance = sqrt(distance);
+
+    if (ceil(distance) == floor(distance)) ans++;
+  }
+
+  cout << ans << endl;
 
   return 0;
 }

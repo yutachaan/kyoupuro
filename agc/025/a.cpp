@@ -49,15 +49,27 @@ bool chmin(T &a, const T& b) {
 const int dx[4] = {1, 0, -1, 0};
 const int dy[4] = {0, 1, 0, -1};
 
+int digits_sum(int a) {
+  int ret = 0;
+  while (a > 0) {
+    ret += a % 10;
+    a /= 10;
+  }
+
+  return ret;
+}
 
 int main() {
   int n;
   cin >> n;
 
-  bool ok = false;
-  REP(i, 26) REP(j, 15) if (4 * i + 7 * j == n) ok = true;
+  int ans = inf;
+  REPS(a, n - 1) {
+    int b = n - a;
+    chmin(ans, digits_sum(a) + digits_sum(b));
+  }
 
-  YesNo(ok);
+  cout << ans << endl;
 
   return 0;
 }

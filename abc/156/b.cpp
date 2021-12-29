@@ -49,15 +49,17 @@ bool chmin(T &a, const T& b) {
 const int dx[4] = {1, 0, -1, 0};
 const int dy[4] = {0, 1, 0, -1};
 
-
 int main() {
-  int n;
-  cin >> n;
+  int n, k;
+  cin >> n >> k;
 
-  bool ok = false;
-  REP(i, 26) REP(j, 15) if (4 * i + 7 * j == n) ok = true;
+  int ans = 0;
+  while (n > 0) {
+    ans++;
+    n /= k;
+  }
 
-  YesNo(ok);
+  cout << ans << endl;
 
   return 0;
 }
