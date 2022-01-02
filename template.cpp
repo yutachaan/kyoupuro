@@ -9,6 +9,8 @@ const ll infl = 1LL << 60;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
+using vl  = vector<ll>;
+using vvl = vector<vl>;
 using vs  = vector<string>;
 using pii = pair<int, int>;
 using mii = map<int, int>;
@@ -17,12 +19,8 @@ using si  = set<int>;
 using ss  = set<string>;
 
 // <----- REPマクロ ----->
-#define FOR(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
-#define RFOR(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
-#define REP(i, n)     FOR(i, 0, n)
-#define REPS(i, n)    FOR(i, 1, n + 1)
-#define RREP(i, n)    RFOR(i, n, 0)
-#define RREPS(i, n)   RFOR(i, n + 1, 1)
+#define REP(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
+#define RREP(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
 #define FOREACH(e, x) for (auto&& (e): x)
 
 // <----- 略記 ----->
@@ -44,10 +42,6 @@ bool chmin(T &a, const T& b) {
   if (a > b) {a = b; return true;}
   return false;
 }
-
-// <----- other ----->
-const int dx[4] = {1, 0, -1, 0};
-const int dy[4] = {0, 1, 0, -1};
 
 
 int main() {
