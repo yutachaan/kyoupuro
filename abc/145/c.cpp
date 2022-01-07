@@ -1,4 +1,3 @@
-// x
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -10,6 +9,8 @@ const ll infl = 1LL << 60;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
+using vl  = vector<ll>;
+using vvl = vector<vl>;
 using vs  = vector<string>;
 using pii = pair<int, int>;
 using mii = map<int, int>;
@@ -18,13 +19,9 @@ using si  = set<int>;
 using ss  = set<string>;
 
 // <----- REPマクロ ----->
-#define FOR(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
-#define RFOR(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
-#define REP(i, n)     FOR(i, 0, n)
-#define REPS(i, n)    FOR(i, 1, n + 1)
-#define RREP(i, n)    RFOR(i, n, 0)
-#define RREPS(i, n)   RFOR(i, n + 1, 1)
-#define FOREACH(e, x) for (auto&& (e): x)
+#define rep(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
+#define rrep(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
+#define foreach(e, x) for (auto&& (e): x)
 
 // <----- 略記 ----->
 #define ALL(x) (x).begin(), (x).end()
@@ -46,32 +43,25 @@ bool chmin(T &a, const T& b) {
   return false;
 }
 
-// <----- other ----->
-const int dx[4] = {1, 0, -1, 0};
-const int dy[4] = {0, 1, 0, -1};
-
 
 int main() {
-  int n, c, k;
-  cin >> n >> c >> k;
+  int n; cin >> n;
+  vector<pii> pos(n);
+  rep(i, 0, n) cin >> pos[i].first >> pos[i].second;
 
-  vi T(n);
-  REP(i, n) cin >> T[i];
-  sort(ALL(T));
-
-  int ans = 0;
-  ll tk, pc;
-  REP(i, n) {
-    tk = T[i] + k; pc = 1;
-
-    while ((pc < c) && (T[i + 1] <= tk)) {
-      pc++;
-      i++;
+  vi mati(n);
+  rep(i, 0, n) mati[i] = i;
+  double ave = 0, c = 0;
+  do {
+    rep(i, 0, n - 1) {
+      ave += sqrt(pow(pos[mati[i]].first - pos[mati[i + 1]].first, 2) + pow(pos[mati[i]].second - pos[mati[i + 1]].second, 2));
     }
-    ans++;
-  }
+    c++;
+  } while(next_permutation(ALL(mati)));
 
-  cout << ans << endl;
+  ave /= c;
+
+  printf("%.7lf\n", ave);
 
   return 0;
 }

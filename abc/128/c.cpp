@@ -1,4 +1,3 @@
-// x
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -10,6 +9,8 @@ const ll infl = 1LL << 60;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
+using vl  = vector<ll>;
+using vvl = vector<vl>;
 using vs  = vector<string>;
 using pii = pair<int, int>;
 using mii = map<int, int>;
@@ -18,12 +19,8 @@ using si  = set<int>;
 using ss  = set<string>;
 
 // <----- REPマクロ ----->
-#define FOR(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
-#define RFOR(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
-#define REP(i, n)     FOR(i, 0, n)
-#define REPS(i, n)    FOR(i, 1, n + 1)
-#define RREP(i, n)    RFOR(i, n, 0)
-#define RREPS(i, n)   RFOR(i, n + 1, 1)
+#define REP(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
+#define RREP(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
 #define FOREACH(e, x) for (auto&& (e): x)
 
 // <----- 略記 ----->
@@ -46,29 +43,34 @@ bool chmin(T &a, const T& b) {
   return false;
 }
 
-// <----- other ----->
-const int dx[4] = {1, 0, -1, 0};
-const int dy[4] = {0, 1, 0, -1};
-
 
 int main() {
-  int n, c, k;
-  cin >> n >> c >> k;
+  // 入力
+  int n, m; cin >> n >> m;
+  vi k(m), p(m); vvi s;
+  REP(i, 0, m) {
+    cin >> k[i];
+    vi temp(k[i]);
+    REP(j, 0, k[i]) cin >> temp[j];
+    s.push_back(temp);
+  }
+  REP(i, 0, m) cin >> p[i];
 
-  vi T(n);
-  REP(i, n) cin >> T[i];
-  sort(ALL(T));
-
+  // 各スイッチのon/offの状態の組み合わせを全探索
   int ans = 0;
-  ll tk, pc;
-  REP(i, n) {
-    tk = T[i] + k; pc = 1;
+  REP(bit, 0, 1 << n) {
+    // その組み合わせで全ての電球が点灯するかどうか調べる
+    bool ok = true;
+    REP(i, 0, m) {
+      int on = 0; // onになっているスイッチの数
+      FOREACH(ss, s[i]) {
+        if (bit & (1 << (ss - 1))) on++; // bitが1なら点灯しているとしてカウント
+      }
 
-    while ((pc < c) && (T[i + 1] <= tk)) {
-      pc++;
-      i++;
+      if (on % 2 != p[i]) ok = false;
     }
-    ans++;
+
+    if (ok) ans++;
   }
 
   cout << ans << endl;

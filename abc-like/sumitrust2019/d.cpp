@@ -10,6 +10,8 @@ const ll infl = 1LL << 60;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
+using vl  = vector<ll>;
+using vvl = vector<vl>;
 using vs  = vector<string>;
 using pii = pair<int, int>;
 using mii = map<int, int>;
@@ -18,12 +20,8 @@ using si  = set<int>;
 using ss  = set<string>;
 
 // <----- REPマクロ ----->
-#define FOR(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
-#define RFOR(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
-#define REP(i, n)     FOR(i, 0, n)
-#define REPS(i, n)    FOR(i, 1, n + 1)
-#define RREP(i, n)    RFOR(i, n, 0)
-#define RREPS(i, n)   RFOR(i, n + 1, 1)
+#define REP(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
+#define RREP(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
 #define FOREACH(e, x) for (auto&& (e): x)
 
 // <----- 略記 ----->
@@ -46,29 +44,24 @@ bool chmin(T &a, const T& b) {
   return false;
 }
 
-// <----- other ----->
-const int dx[4] = {1, 0, -1, 0};
-const int dy[4] = {0, 1, 0, -1};
-
 
 int main() {
-  int n, c, k;
-  cin >> n >> c >> k;
+  int n;
+  string s;
+  cin >> n >> s;
 
-  vi T(n);
-  REP(i, n) cin >> T[i];
-  sort(ALL(T));
-
+  // 000〜999を作れるかを全探索
   int ans = 0;
-  ll tk, pc;
-  REP(i, n) {
-    tk = T[i] + k; pc = 1;
+  REP(i, 0, 1000) {
+    int c[3] = {i / 100, (i / 10) % 10, i % 10}; // 000〜999の各桁を要素とする配列
+    int d = 0;                                   // 今どの桁をみているのか
 
-    while ((pc < c) && (T[i + 1] <= tk)) {
-      pc++;
-      i++;
+    // sを前から見ていき，c[d]があったら，次の桁を探す
+    REP(j, 0, n) {
+      if (s[j] == c[d] + '0') d++;
+      if (d == 3) break;
     }
-    ans++;
+    if (d == 3) ans++;
   }
 
   cout << ans << endl;
