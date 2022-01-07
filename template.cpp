@@ -19,9 +19,9 @@ using si  = set<int>;
 using ss  = set<string>;
 
 // <----- REPマクロ ----->
-#define REP(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
-#define RREP(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
-#define FOREACH(e, x) for (auto&& (e): x)
+#define rep(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
+#define rrep(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
+#define foreach(e, x) for (auto&& (e): x)
 
 // <----- 略記 ----->
 #define ALL(x) (x).begin(), (x).end()
