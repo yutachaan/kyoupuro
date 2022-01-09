@@ -1,3 +1,3 @@
 コンテスト開始時
-atcoder-tools gen abc... --workspace ./ABC201-250
+atcoder-tools gen abc... --workspace ./abc
 → コンテスト環境用意(ディレクトリ作成，テンプレートファイル，in-out DL)
