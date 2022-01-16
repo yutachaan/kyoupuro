@@ -1,4 +1,3 @@
-// x
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -46,16 +45,15 @@ bool chmin(T &a, const T& b) {
 
 
 int main() {
-  ll a, b, c, d; cin >> a >> b >> c >> d; a--;
-  ll e = lcm(c, d);
+  string s; cin >> s;
 
-  ll c_mul = b / c - a / c; // a以上b以下のcの倍数の個数
-  ll d_mul = b / d - a / d; // a以上b以下のdの倍数の個数
-  ll e_mul = b / e - a / e; // a以上b以下のcの倍数かつdの倍数の個数
+  int abc = stoi(s);
+  swap(s[0], s[1]); swap(s[1], s[2]);
+  int bca = stoi(s);
+  swap(s[0], s[1]); swap(s[1], s[2]);
+  int cab = stoi(s);
 
-  ll ans = b - a - c_mul - d_mul + e_mul;
-
-  cout << ans << endl;
+  cout << abc + bca + cab << endl;
 
   return 0;
 }

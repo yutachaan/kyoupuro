@@ -46,16 +46,36 @@ bool chmin(T &a, const T& b) {
 
 
 int main() {
-  ll a, b, c, d; cin >> a >> b >> c >> d; a--;
-  ll e = lcm(c, d);
+  int a, n; cin >> a >> n;
 
-  ll c_mul = b / c - a / c; // a以上b以下のcの倍数の個数
-  ll d_mul = b / d - a / d; // a以上b以下のdの倍数の個数
-  ll e_mul = b / e - a / e; // a以上b以下のcの倍数かつdの倍数の個数
+  vi d(1000000, -1); d[1] = 0;
+  queue<int> q; q.push(1);
 
-  ll ans = b - a - c_mul - d_mul + e_mul;
+  while (!q.empty()) {
+    int x = q.front();
+    q.pop();
 
-  cout << ans << endl;
+    // a倍にした場合
+    ll temp = (ll) x * a;
+    if (temp < 1000000){
+      if (d[temp] == -1) {
+        d[temp] = d[x] + 1;
+        q.push(temp);
+      }
+    }
 
-  return 0;
+    // 回転させた場合
+    if (x >= 10 && x % 10 != 0) {
+      string sx = to_string(x);
+      rotate(sx.begin(), sx.end() - 1, sx.end());
+      int y = stoi(sx);
+
+      if (d[y] == -1) {
+        d[y] = d[x] + 1;
+        q.push(y);
+      }
+    }
+  }
+
+  cout << d[n] << endl;
 }

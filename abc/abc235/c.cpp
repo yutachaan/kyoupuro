@@ -1,4 +1,3 @@
-// x
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -46,16 +45,19 @@ bool chmin(T &a, const T& b) {
 
 
 int main() {
-  ll a, b, c, d; cin >> a >> b >> c >> d; a--;
-  ll e = lcm(c, d);
+  int n, q; cin >> n >> q;
+  map<int, vi> mp;
+  rep(i, 0, n) {
+    int a; cin >> a;
+    mp[a].push_back(i + 1); // 数aのインデックスを配列に追加 1-index
+  }
 
-  ll c_mul = b / c - a / c; // a以上b以下のcの倍数の個数
-  ll d_mul = b / d - a / d; // a以上b以下のdの倍数の個数
-  ll e_mul = b / e - a / e; // a以上b以下のcの倍数かつdの倍数の個数
+  rep(j, 0, q) {
+    int x, k; cin >> x >> k;
 
-  ll ans = b - a - c_mul - d_mul + e_mul;
-
-  cout << ans << endl;
+    if (SIZE(mp[x]) < k) cout << -1 << endl; // kが数xの出現回数よりも大きい場合
+    else cout << mp[x][k - 1] << endl;
+  }
 
   return 0;
 }
