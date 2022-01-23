@@ -1,6 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// <----- debug ----->
+#ifdef LOCAL
+#  include <debug_print.hpp>
+#  define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#  define debug(...) (static_cast<void>(0))
+#endif
+
 // <----- alias ----->
 using ll = long long;
 
@@ -27,9 +35,9 @@ using ss  = set<string>;
 #define ALL(x) (x).begin(), (x).end()
 #define SIZE(x) ll((x).size())
 
-#define YESNO(n) cout << ((n) ? "YES" : "NO") << endl
-#define yesno(n) cout << ((n) ? "yes" : "no") << endl
-#define YesNo(n) cout << ((n) ? "Yes" : "No") << endl
+#define YESNO(n) cout << ((n) ? "YES" : "NO") << "\n"
+#define yesno(n) cout << ((n) ? "yes" : "no") << "\n"
+#define YesNo(n) cout << ((n) ? "Yes" : "No") << "\n"
 
 // <----- function ----->
 template <typename T>
