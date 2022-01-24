@@ -12,8 +12,8 @@ using namespace std;
 // <----- alias ----->
 using ll = long long;
 
-const int inf = INT_MAX / 2;
-const ll infl = 1LL << 60;
+const int inf = numeric_limits<int>::max() / 2;
+const ll infl = numeric_limits<ll>::max()  / 2;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
@@ -26,13 +26,15 @@ using msi = map<string, int>;
 using si  = set<int>;
 using ss  = set<string>;
 
+#define endl "\n";
+
 // <----- REPマクロ ----->
 #define rep(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
 #define rrep(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
 #define foreach(e, x) for (auto&& (e): x)
 
 // <----- 略記 ----->
-#define ALL(x) (x).begin(), (x).end()
+#define ALL(x) begin((x)), end((x))
 #define SIZE(x) ll((x).size())
 
 #define YESNO(n) cout << ((n) ? "YES" : "NO") << "\n"
