@@ -2,14 +2,24 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// <----- debug ----->
+#ifdef LOCAL
+#  include <debug_print.hpp>
+#  define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#  define debug(...) (static_cast<void>(0))
+#endif
+
 // <----- alias ----->
 using ll = long long;
 
-const int inf = INT_MAX / 2;
-const ll infl = 1LL << 60;
+const int inf = numeric_limits<int>::max() / 2;
+const ll infl = numeric_limits<ll>::max()  / 2;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
+using vl  = vector<ll>;
+using vvl = vector<vl>;
 using vs  = vector<string>;
 using pii = pair<int, int>;
 using mii = map<int, int>;
@@ -17,22 +27,20 @@ using msi = map<string, int>;
 using si  = set<int>;
 using ss  = set<string>;
 
+#define endl "\n";
+
 // <----- REPマクロ ----->
-#define FOR(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
-#define RFOR(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
-#define REP(i, n)     FOR(i, 0, n)
-#define REPS(i, n)    FOR(i, 1, n + 1)
-#define RREP(i, n)    RFOR(i, n, 0)
-#define RREPS(i, n)   RFOR(i, n + 1, 1)
-#define FOREACH(e, x) for (auto&& (e): x)
+#define rep(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
+#define rrep(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
+#define foreach(e, x) for (auto&& (e): x)
 
 // <----- 略記 ----->
-#define ALL(x) (x).begin(), (x).end()
+#define ALL(x) begin((x)), end((x))
 #define SIZE(x) ll((x).size())
 
-#define YESNO(n) cout << ((n) ? "YES" : "NO") << endl
-#define yesno(n) cout << ((n) ? "yes" : "no") << endl
-#define YesNo(n) cout << ((n) ? "Yes" : "No") << endl
+#define YESNO(n) cout << ((n) ? "YES" : "NO") << "\n"
+#define yesno(n) cout << ((n) ? "yes" : "no") << "\n"
+#define YesNo(n) cout << ((n) ? "Yes" : "No") << "\n"
 
 // <----- function ----->
 template <typename T>
@@ -46,33 +54,23 @@ bool chmin(T &a, const T& b) {
   return false;
 }
 
-// <----- other ----->
-const int dx[4] = {1, 0, -1, 0};
-const int dy[4] = {0, 1, 0, -1};
-
 
 int main() {
-  int n;
-  cin >> n;
+  int n; cin >> n;
+  vi a(n);
+  foreach(e, a) cin >> e;
 
-  vi A(n);
-  REP(i, n) cin >> A[i];
-
-  int ans = 0;
-  int i = 0;
+  int ans = 0, i = 0;
   while (i < n) {
     // 単調非減少の間はjを増加
     int j = i + 1;
-    while (A[j - 1] <= A[j]) j++;
+    while (a[j - 1] <= a[j]) j++;
 
     // 単調非増加の間はkを増加
     int k = i + 1;
-    while (A[k - 1] >= A[k]) k++;
+    while (a[k - 1] >= a[k]) k++;
 
-    // 単調非減少と単調非増加でより長い数列を作れた方を採用し，その分iを増加
-    if (j > k) i += j - i;
-    else i += k - i;
-
+    i += max(j, k) - i;
     ans++;
   }
 
