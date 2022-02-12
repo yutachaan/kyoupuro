@@ -54,13 +54,44 @@ bool chmin(T &a, const T& b) {
 }
 
 
-int main() {
-  ll a, b, n; cin >> a >> b >> n;
+int n, m, q, ans;
+vvi kumi;
 
-  // x=0 のとき0になり， 単調非減少
-  // mod bで周期性があるので， x=b-1 のとき最大値をとる
-  // n<b-1のときは x=n で最大
-  ll ans = (a * min(b - 1, n)) / b - a * (min(b - 1, n) / b);
+void dfs(vi a) {
+  // aの生成が終了したら得点の計算をする
+  if (SIZE(a) == n) {
+    int temp = 0;
+    rep(i, 0, q) {
+      if (a[kumi[i][1] - 1] - a[kumi[i][0] - 1] == kumi[i][2]) temp += kumi[i][3];
+    }
+    chmax(ans, temp);
+
+    return;
+  }
+
+  // 末尾の要素の値
+  int last = 1;
+  if (SIZE(a) >= 1) last = a[SIZE(a) - 1];
+
+  // last以上の要素を最後尾に追加して次を呼び出す
+  rep(i, last, m + 1) {
+    vi a_copy;
+    copy(ALL(a), back_inserter(a_copy));
+    a_copy.push_back(i);
+
+    dfs(a_copy);
+  }
+}
+
+int main() {
+  // 入力
+  cin >> n >> m >> q;
+  kumi.resize(q, vi(4));
+  rep(i, 0, q) rep(j, 0, 4) cin >> kumi[i][j];
+
+  // 空の状態からスタートしてdfs
+  vi a;
+  dfs(a);
 
   cout << ans << endl;
 

@@ -55,14 +55,21 @@ bool chmin(T &a, const T& b) {
 
 
 int main() {
-  ll a, b, n; cin >> a >> b >> n;
+  int x; cin >> x;
 
-  // x=0 のとき0になり， 単調非減少
-  // mod bで周期性があるので， x=b-1 のとき最大値をとる
-  // n<b-1のときは x=n で最大
-  ll ans = (a * min(b - 1, n)) / b - a * (min(b - 1, n) / b);
+  int c = x / 100; // 買うことのできる商品の数
+  x %= 100;
 
-  cout << ans << endl;
+  // c個以内にの商品を使ってx円をつくれるか
+  while (c > 0 and x > 0) {
+    if (x >= 5) { x -= 5; c -= 1; }
+    else if (x >= 4) { x -= 4; c -= 1; }
+    else if (x >= 3) { x -= 3; c -= 1; }
+    else if (x >= 2) { x -= 2; c -= 1; }
+    else if (x >= 1) { x -= 1; c -= 1; }
+  }
+
+  cout << (x <= 0) << endl;
 
   return 0;
 }

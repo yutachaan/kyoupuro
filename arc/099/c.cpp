@@ -55,14 +55,22 @@ bool chmin(T &a, const T& b) {
 
 
 int main() {
-  ll a, b, n; cin >> a >> b >> n;
+  int n, k; cin >> n >> k;
+  // 数列Aには依存しない
 
-  // x=0 のとき0になり， 単調非減少
-  // mod bで周期性があるので， x=b-1 のとき最大値をとる
-  // n<b-1のときは x=n で最大
-  ll ans = (a * min(b - 1, n)) / b - a * (min(b - 1, n) / b);
+  // iがn-1以上になるまでiをk-1個ずつ進める
+  int i = 0, ans = 0;
+  while (i < n) {
+    ans++;
+    i += k - 1;
+  }
+
+  // ジャストで終わらなかった場合+1
+  if (i == n + k - 2) ans--;
 
   cout << ans << endl;
+
+  // よく考えたら上で行っている処理は ceil((n-1) / (k - 1))に等しい
 
   return 0;
 }

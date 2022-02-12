@@ -1,3 +1,4 @@
+// x
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -55,14 +56,25 @@ bool chmin(T &a, const T& b) {
 
 
 int main() {
-  ll a, b, n; cin >> a >> b >> n;
+  int n; cin >> n;
+  vi a(n);
+  foreach(e, a) cin >> e;
 
-  // x=0 のとき0になり， 単調非減少
-  // mod bで周期性があるので， x=b-1 のとき最大値をとる
-  // n<b-1のときは x=n で最大
-  ll ans = (a * min(b - 1, n)) / b - a * (min(b - 1, n) / b);
+  int c = 0, c2 = 0, c4 = 0;
+  rep(i, 0, n) {
+    if (a[i] % 4 == 0) c4++;
+    else if (a[i] % 2 == 0) c2++;
+    else c++;
+  }
 
-  cout << ans << endl;
+  bool ok;
+  if (c4 + 1 == c) {
+    if (c2 == 0) ok = true;
+    else ok = false;
+  }
+  else ok = c4 >= c;
+
+  YesNo(ok);
 
   return 0;
 }

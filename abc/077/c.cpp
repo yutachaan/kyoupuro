@@ -1,3 +1,4 @@
+// x
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -55,12 +56,23 @@ bool chmin(T &a, const T& b) {
 
 
 int main() {
-  ll a, b, n; cin >> a >> b >> n;
+  int n; cin >> n;
+  vi a(n), b(n), c(n);
+  foreach(e, a) cin >> e;
+  foreach(e, b) cin >> e;
+  foreach(e, c) cin >> e;
 
-  // x=0 のとき0になり， 単調非減少
-  // mod bで周期性があるので， x=b-1 のとき最大値をとる
-  // n<b-1のときは x=n で最大
-  ll ans = (a * min(b - 1, n)) / b - a * (min(b - 1, n) / b);
+  sort(ALL(a));
+  sort(ALL(c));
+
+  // 中部を全探索
+  ll ans = 0;
+  rep(i, 0, n) {
+    int ok_a = lower_bound(ALL(a), b[i]) - begin(a);       // b[i]未満のaの数
+    int ok_c = n - (upper_bound(ALL(c), b[i]) - begin(c)); // b[i]より大きいcの数
+
+    ans += (ll) ok_a * ok_c;
+  }
 
   cout << ans << endl;
 

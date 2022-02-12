@@ -55,16 +55,15 @@ bool chmin(T &a, const T& b) {
 
 
 int main() {
-  int n; cin >> n;
-  string s; cin >> s;
+  int n; string s; cin >> n >> s;
 
-  deque<int> q = {n};
-  rrep(i, n, 0) {
-    if (s[i] == 'L') q.push_back(i);
-    else q.push_front(i);
+  deque<int> a = {n};
+  rrep(i, SIZE(s), 0) {
+    if (s[i] == 'R') a.push_front(i);
+    else a.push_back(i);
   }
 
-  foreach(e, q) cout << e << ' ';
+  foreach(e, a) cout << e << ' ';
   cout << endl;
 
   return 0;

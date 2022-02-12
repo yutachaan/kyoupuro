@@ -55,12 +55,28 @@ bool chmin(T &a, const T& b) {
 
 
 int main() {
-  ll a, b, n; cin >> a >> b >> n;
+  int n; cin >> n;
+  mii mp;
+  rep(i, 0, n) {
+    int a; cin >> a;
+    mp[a]++;
+  }
 
-  // x=0 のとき0になり， 単調非減少
-  // mod bで周期性があるので， x=b-1 のとき最大値をとる
-  // n<b-1のときは x=n で最大
-  ll ans = (a * min(b - 1, n)) / b - a * (min(b - 1, n) / b);
+  // 2本以上ある棒と4本以上ある棒をそれぞれ記録
+  vl bou_2, bou_4;
+  foreach(e, mp) {
+    if (e.second >= 2) bou_2.push_back(e.first);
+    if (e.second >= 4) bou_4.push_back(e.first);
+  }
+
+  sort(ALL(bou_2), greater<ll>());
+  sort(ALL(bou_4), greater<ll>());
+
+  ll ans = 0; // 2本以上ある棒が1種類以下なら長方形は作れない
+  if (SIZE(bou_2) >= 2) {
+    ans = bou_2[0] * bou_2[1];
+    if (SIZE(bou_4) >= 1) chmax(ans, bou_4[0] * bou_4[0]);
+  }
 
   cout << ans << endl;
 

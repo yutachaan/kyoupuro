@@ -1,3 +1,4 @@
+// x
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -54,15 +55,27 @@ bool chmin(T &a, const T& b) {
 }
 
 
+int n;
+
+void dfs(string s) {
+  if (SIZE(s) == n) {
+    cout << s << endl;
+    return;
+  }
+
+  // sに含まれる辞書順で最大の文字を調べる
+  set<char> alpha;
+  foreach(e, s) alpha.insert(e);
+  char last = *(--alpha.end());
+
+  // 次に追加する文字は'a'からlastの次の文字までのどれか
+  for (char c = 'a'; c <= last + 1; c++) dfs(s + c);
+}
+
 int main() {
-  ll a, b, n; cin >> a >> b >> n;
+  cin >> n;
 
-  // x=0 のとき0になり， 単調非減少
-  // mod bで周期性があるので， x=b-1 のとき最大値をとる
-  // n<b-1のときは x=n で最大
-  ll ans = (a * min(b - 1, n)) / b - a * (min(b - 1, n) / b);
-
-  cout << ans << endl;
+  dfs("a");
 
   return 0;
 }

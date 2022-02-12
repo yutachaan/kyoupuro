@@ -55,14 +55,22 @@ bool chmin(T &a, const T& b) {
 
 
 int main() {
-  ll a, b, n; cin >> a >> b >> n;
+  int n; cin >> n;
+  vector<pii> ba(n);
+  foreach(e, ba) cin >> e.second >> e.first;
 
-  // x=0 のとき0になり， 単調非減少
-  // mod bで周期性があるので， x=b-1 のとき最大値をとる
-  // n<b-1のときは x=n で最大
-  ll ans = (a * min(b - 1, n)) / b - a * (min(b - 1, n) / b);
+  // 締め切りが早い順に実行
+  sort(ALL(ba));
 
-  cout << ans << endl;
+  ll time = 0; // 現在時刻
+  bool ok = true;
+  foreach(e, ba) {
+    // 現在時刻に作業時間を足した結果，締め切りを過ぎていたらアウト
+    time += e.second;
+    if (time > e.first) ok = false;
+  }
+
+  YesNo(ok);
 
   return 0;
 }

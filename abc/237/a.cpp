@@ -56,9 +56,8 @@ bool chmin(T &a, const T& b) {
 
 int main() {
   ll n; cin >> n;
-  ll m = (ll)1 << 31;
 
-  YesNo(-m <= n and n < m);
+  YesNo(n >= -2147483648 and n <= 2147483647);
 
   return 0;
 }

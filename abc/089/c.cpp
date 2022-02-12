@@ -55,12 +55,29 @@ bool chmin(T &a, const T& b) {
 
 
 int main() {
-  ll a, b, n; cin >> a >> b >> n;
+  int n; cin >> n;
+  string march = "MARCH";
 
-  // x=0 のとき0になり， 単調非減少
-  // mod bで周期性があるので， x=b-1 のとき最大値をとる
-  // n<b-1のときは x=n で最大
-  ll ans = (a * min(b - 1, n)) / b - a * (min(b - 1, n) / b);
+  // 先頭がMARCHのいずれかなら， 先頭の文字の個数をインクリメント
+  map<char, int> mp = {{'M', 0}, {'A', 0}, {'R', 0}, {'C', 0}, {'H', 0}};
+  rep(i, 0, n) {
+    string s; cin >> s;
+    if (march.find(s[0]) != string::npos) mp[s[0]]++;
+  }
+
+  ll ans = 0;
+
+  // MARCHの5つから3つ選ぶ組み合わせ全探索
+  vector<bool> a(5, false);
+  fill(begin(a), begin(a) + 3, true);
+  do {
+    // その組み合わせを作ることのできる場合の数を計算
+    ll temp = 1;
+    rep(i, 0, 5) {
+      if (a[i]) temp *= mp[march[i]];
+    }
+    ans += temp;
+  } while (prev_permutation(ALL(a)));
 
   cout << ans << endl;
 

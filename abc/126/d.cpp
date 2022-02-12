@@ -1,3 +1,4 @@
+// x
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -54,15 +55,39 @@ bool chmin(T &a, const T& b) {
 }
 
 
+struct Edge {
+  int to;     // 辺の行き先
+  int weight; // 辺の長さ
+  Edge(int t, int w): to(t), weight(w) { }
+};
+
+vector<vector<Edge>> G;
+vi ans; // 1 (黒確定)，0 (白確定)，-1 (未訪問)
+
+void dfs(int v, int c = 0, int p = -1) {
+  ans[v] = c;
+  foreach(e, G[v]) {
+    if (e.to == p) continue; // 辺を逆に辿らないようにする
+
+    if (e.weight % 2 == 0) dfs(e.to, c, v); // 辺の長さが偶数なら同じ色
+    else dfs(e.to, 1 - c, v);               // 辺の長さが奇数なら違う色
+  }
+}
+
 int main() {
-  ll a, b, n; cin >> a >> b >> n;
+  int n; cin >> n;
+  G.resize(n, vector<Edge>());
+  rep(i, 0, n - 1) {
+    int u, v, w; cin >> u >> v >> w;
+    u--, v--;
+    G[u].push_back(Edge(v, w));
+		G[v].push_back(Edge(u, w));
+  }
 
-  // x=0 のとき0になり， 単調非減少
-  // mod bで周期性があるので， x=b-1 のとき最大値をとる
-  // n<b-1のときは x=n で最大
-  ll ans = (a * min(b - 1, n)) / b - a * (min(b - 1, n) / b);
+  ans.resize(n, -1);
+  dfs(0);
 
-  cout << ans << endl;
+  foreach(e, ans) cout << e << endl;
 
   return 0;
 }

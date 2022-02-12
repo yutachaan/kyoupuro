@@ -54,15 +54,49 @@ bool chmin(T &a, const T& b) {
 }
 
 
+int h, w;
+vs field;
+vector<vector<bool>> seen; // 探索済みか
+
+vi dx = {0, -1, 1, 0};
+vi dy = {-1, 0, 0, 1};
+
+void dfs(int y, int x) {
+  seen[y][x] = true;
+
+  // 4近傍探索
+  rep(d, 0, 4) {
+    int yy = y + dy[d], xx = x + dx[d];
+    if (yy >= 0 and yy < h and xx >= 0 and xx < w) {
+      if (seen[yy][xx]) continue;
+
+      if (field[yy][xx] == '#') continue;
+
+      dfs(yy, xx);
+    }
+  }
+}
+
 int main() {
-  ll a, b, n; cin >> a >> b >> n;
+  cin >> h >> w;
+  field.resize(h);
+  foreach(e, field) cin >> e;
 
-  // x=0 のとき0になり， 単調非減少
-  // mod bで周期性があるので， x=b-1 のとき最大値をとる
-  // n<b-1のときは x=n で最大
-  ll ans = (a * min(b - 1, n)) / b - a * (min(b - 1, n) / b);
+  // 始点と終点の座標を調べる
+  int sy, sx, gy, gx;
+  rep(y, 0, h) rep(x, 0, w) {
+    if (field[y][x] == 's') {
+      sy = y; sx = x;
+    }
+    if (field[y][x] == 'g') {
+      gy = y; gx = x;
+    }
+  }
 
-  cout << ans << endl;
+  // sを始点としてDFS
+  seen.resize(h, vector<bool>(w, false));
+  dfs(sy, sx);
 
-  return 0;
+  // gが探索済みかどうか
+  YesNo(seen[gy][gx]);
 }
