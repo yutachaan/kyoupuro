@@ -1,14 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// <----- debug ----->
+#ifdef LOCAL
+#  include <debug_print.hpp>
+#  define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#  define debug(...) (static_cast<void>(0))
+#endif
+
 // <----- alias ----->
 using ll = long long;
 
-const int inf = INT_MAX / 2;
-const ll infl = 1LL << 60;
+const int inf = numeric_limits<int>::max() / 2;
+const ll infl = numeric_limits<ll>::max()  / 2;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
+using vl  = vector<ll>;
+using vvl = vector<vl>;
 using vs  = vector<string>;
 using pii = pair<int, int>;
 using mii = map<int, int>;
@@ -16,22 +26,20 @@ using msi = map<string, int>;
 using si  = set<int>;
 using ss  = set<string>;
 
+#define endl "\n";
+
 // <----- REPマクロ ----->
-#define FOR(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
-#define RFOR(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
-#define REP(i, n)     FOR(i, 0, n)
-#define REPS(i, n)    FOR(i, 1, n + 1)
-#define RREP(i, n)    RFOR(i, n, 0)
-#define RREPS(i, n)   RFOR(i, n + 1, 1)
-#define FOREACH(e, x) for (auto&& (e): x)
+#define rep(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
+#define rrep(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
+#define foreach(e, x) for (auto&& (e): x)
 
 // <----- 略記 ----->
-#define ALL(x) (x).begin(), (x).end()
+#define ALL(x) begin((x)), end((x))
 #define SIZE(x) ll((x).size())
 
-#define YESNO(n) cout << ((n) ? "YES" : "NO") << endl
-#define yesno(n) cout << ((n) ? "yes" : "no") << endl
-#define YesNo(n) cout << ((n) ? "Yes" : "No") << endl
+#define YESNO(n) cout << ((n) ? "YES" : "NO") << "\n"
+#define yesno(n) cout << ((n) ? "yes" : "no") << "\n"
+#define YesNo(n) cout << ((n) ? "Yes" : "No") << "\n"
 
 // <----- function ----->
 template <typename T>
@@ -45,36 +53,32 @@ bool chmin(T &a, const T& b) {
   return false;
 }
 
-// <----- other ----->
-const int dx[4] = {1, 0, -1, 0};
-const int dy[4] = {0, 1, 0, -1};
 
-ll n, x, ans;
+int n, ans;
+ll x;
 vvi a;
 
-// 深さ優先探索(i: 何番目の値を見ているか， s: ここまでの積)
-void dfs(int i, ll s) {
+// i: aのindex, p: 現時点での総積
+void dfs(int i, ll p) {
   if (i == n) {
-    if (s == x) ans++;
+    if (p == x) ans++;
     return;
   }
 
-  FOREACH(c, a[i]) {
-    if (s > x / c) continue; // s * c > xだとオーバーフローする
-    dfs(i + 1, s * c);
+  foreach(e, a[i]) {
+    if (p > x / e) continue;
+    dfs(i + 1, p * e);
   }
 }
 
 int main() {
   cin >> n >> x;
-  a = vvi(n);
-
-  REP(i, n) {
-    int l;
-    cin >> l;
-
-    a[i] = vi(l);
-    REP(j, l) cin >> a[i][j];
+  a.resize(n, vi());
+  rep(i, 0, n) {
+    int l; cin >> l;
+    vi ai(l);
+    foreach(e, ai) cin >> e;
+    a[i] = ai;
   }
 
   dfs(0, 1);
