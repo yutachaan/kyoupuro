@@ -1,14 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// <----- debug ----->
-#ifdef LOCAL
-#  include <debug_print.hpp>
-#  define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
-#else
-#  define debug(...) (static_cast<void>(0))
-#endif
-
 // <----- alias ----->
 using ll = long long;
 
@@ -17,23 +9,18 @@ const ll infl = numeric_limits<ll>::max()  / 2;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
-using vl  = vector<ll>;
-using vvl = vector<vl>;
 using vs  = vector<string>;
 using pii = pair<int, int>;
-using mii = map<int, int>;
-using msi = map<string, int>;
-using si  = set<int>;
-using ss  = set<string>;
 
 #define endl "\n";
 
-// <----- REPマクロ ----->
+// <----- rep macro ----->
 #define rep(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
 #define rrep(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
-#define foreach(e, x) for (auto&& (e): x)
+#define fore(e, x) for (auto &&(e): x)
+#define fore2(k, v, x) for (auto &&[k, v]: x)
 
-// <----- 略記 ----->
+// <----- other macro ----->
 #define ALL(x) begin((x)), end((x))
 #define SIZE(x) ll((x).size())
 

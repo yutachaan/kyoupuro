@@ -5,3 +5,11 @@ atcoder-tools gen abc... --workspace ./abc
 
 デバッグ
 g++ -std=c++17 -I/Users/yutachan/Documents/kyoupuro -DLOCAL
+
+// <----- debug ----->
+#ifdef LOCAL
+#  include <debug_print.hpp>
+#  define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
+#else
+#  define debug(...) (static_cast<void>(0))
+#endif
