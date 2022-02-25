@@ -42,10 +42,20 @@ bool chmin(T &a, const T& b) {
 
 
 int main() {
-  int s, t, x; cin >> s >> t >> x;
+  int n, x; cin >> n >> x; x--;
+  vi a(n);
+  fore(e, a) {
+    cin >> e; e--;
+  }
 
-  if (s < t) YesNo(x >= s and x < t);
-  else YesNo(x < t or x >= s);
+  // 状態がループするまで， stに秘密を知った人の番号を追加
+  set<int> st;
+  while (st.count(x) == 0 and SIZE(st) <= n) {
+    st.insert(x);
+    x = a[x];
+  }
+
+  cout << SIZE(st) << endl;
 
   return 0;
 }

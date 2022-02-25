@@ -42,10 +42,21 @@ bool chmin(T &a, const T& b) {
 
 
 int main() {
-  int s, t, x; cin >> s >> t >> x;
+  int n, k; cin >> n >> k;
+  vi p(n, 0), q(n);
+  rep(i, 0, n) rep(j, 0, 3) {
+    int a; cin >> a;
+    p[i] += a;
+  }
 
-  if (s < t) YesNo(x >= s and x < t);
-  else YesNo(x < t or x >= s);
+  copy(ALL(p), back_inserter(q));
+
+  // K番目に大きい値
+  sort(ALL(q), greater<int>());
+  int s =q[k - 1];
+
+  // 3日目までの点数に300点を足した点数が，K番目に大きい点数以上ならYes
+  fore(e, p) YesNo(e + 300 >= s);
 
   return 0;
 }
