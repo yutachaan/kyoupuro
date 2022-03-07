@@ -1,14 +1,5 @@
-// x
 #include <bits/stdc++.h>
 using namespace std;
-
-// <----- debug ----->
-#ifdef LOCAL
-#  include <debug_print.hpp>
-#  define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
-#else
-#  define debug(...) (static_cast<void>(0))
-#endif
 
 // <----- alias ----->
 using ll = long long;
@@ -18,23 +9,18 @@ const ll infl = numeric_limits<ll>::max()  / 2;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
-using vl  = vector<ll>;
-using vvl = vector<vl>;
 using vs  = vector<string>;
 using pii = pair<int, int>;
-using mii = map<int, int>;
-using msi = map<string, int>;
-using si  = set<int>;
-using ss  = set<string>;
 
 #define endl "\n";
 
-// <----- REPマクロ ----->
+// <----- rep macro ----->
 #define rep(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
 #define rrep(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
-#define foreach(e, x) for (auto&& (e): x)
+#define fore(e, x) for (auto &&(e): x)
+#define fore2(k, v, x) for (auto &&[k, v]: x)
 
-// <----- 略記 ----->
+// <----- other macro ----->
 #define ALL(x) begin((x)), end((x))
 #define SIZE(x) ll((x).size())
 
@@ -54,31 +40,37 @@ bool chmin(T &a, const T& b) {
   return false;
 }
 
-#define mod 998244353
-#define mod2 499122177
 
-// 1からxまでの和(mod 998244353)を求める
-ll sum(ll x) {
+int mod = 998244353;
+
+// 1からxまでの和を求める
+ll f(ll x) {
   x %= mod;
-  ll ret = x;
-  ret *= x + 1; ret %= mod;
-  ret *= mod2; ret %= mod;
+  return (x * (x + 1) / 2) % mod;
+}
 
+// nの桁数を求める
+int digits(ll n) {
+  int ret = 0;
+  while (n > 0) {
+    n /= 10;
+    ret++;
+  }
   return ret;
 }
 
 int main() {
   ll n; cin >> n;
+  int d = digits(n);
 
-  ll p10 = 10;
   ll ans = 0;
-  rep(d, 1, 19) {
-    ll l = p10 / 10;
-    ll r = min(n, p10 - 1);
+  if (d == 1) ans = f(n);
+  else {
+    ans = f(n - (stol(string(d - 1, '9'))));
 
-    if (l <= r) { ans += sum(r - l + 1); ans %= mod; }
-
-    p10 *= 10;
+    ans += f(9);
+    rep(i, 1, d - 1) ans += f(stol('9' + string(i, '0')));
+    ans %= mod;
   }
 
   cout << ans << endl;

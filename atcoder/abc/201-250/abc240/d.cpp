@@ -1,4 +1,3 @@
-// x
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -43,27 +42,23 @@ bool chmin(T &a, const T& b) {
 
 
 int main() {
-  int n; cin >> n;
+  int N; cin >> N;
 
-  stack<pii> tutu; // f: ボールに書かれている数， s: 連続している個数
+  stack<pii> tutu; // f: ボールに書かれた数字， s: 連続している数
   int ans = 0;
-  rep(i, 0, n) {
+  rep(i, 0, N) {
     int a; cin >> a;
+
     ans++;
 
-    if (tutu.empty()) tutu.push(make_pair(a, 1));
-    else {
-      // 一番上のボールと書かれている整数が同じ場合
-      if (tutu.top().first == a) {
-        tutu.top().second++;
+    // 筒にボールを追加
+    if (tutu.empty() || tutu.top().first != a) tutu.push(make_pair(a, 1));
+    else tutu.top().second++;
 
-        // ボールに書かれている整数と連続している個数が同じになったら， 合計個数から連続している個数を引いて， pop
-        if (tutu.top().second == tutu.top().first) {
-          ans -= tutu.top().second;
-          tutu.pop();
-        }
-      }
-      else tutu.push(make_pair(a, 1)); // 異なる数字が書かれているなら普通にpush
+    // ボールに書かれた数字と連続している数が同じなら， ボールを消す
+    if (tutu.top().first == tutu.top().second) {
+      tutu.pop();
+      ans -= a;
     }
 
     cout << ans << endl;

@@ -1,14 +1,5 @@
-// x
 #include <bits/stdc++.h>
 using namespace std;
-
-// <----- debug ----->
-#ifdef LOCAL
-#  include <debug_print.hpp>
-#  define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
-#else
-#  define debug(...) (static_cast<void>(0))
-#endif
 
 // <----- alias ----->
 using ll = long long;
@@ -18,23 +9,18 @@ const ll infl = numeric_limits<ll>::max()  / 2;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
-using vl  = vector<ll>;
-using vvl = vector<vl>;
 using vs  = vector<string>;
 using pii = pair<int, int>;
-using mii = map<int, int>;
-using msi = map<string, int>;
-using si  = set<int>;
-using ss  = set<string>;
 
 #define endl "\n";
 
-// <----- REPマクロ ----->
+// <----- rep macro ----->
 #define rep(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
 #define rrep(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
-#define foreach(e, x) for (auto&& (e): x)
+#define fore(e, x) for (auto &&(e): x)
+#define fore2(k, v, x) for (auto &&[k, v]: x)
 
-// <----- 略記 ----->
+// <----- other macro ----->
 #define ALL(x) begin((x)), end((x))
 #define SIZE(x) ll((x).size())
 
@@ -63,18 +49,18 @@ void dfs(string s) {
     return;
   }
 
-  // sに含まれる辞書順で最大の文字を調べる
-  set<char> alpha;
-  foreach(e, s) alpha.insert(e);
-  char last = *(--alpha.end());
+  // sに登場する文字の集合
+  set<char> st;
+  fore(c, s) st.insert(c);
 
-  // 次に追加する文字は'a'からlastの次の文字までのどれか
-  for (char c = 'a'; c <= last + 1; c++) dfs(s + c);
+  // 次に足す文字は， 'a'からstに含まれる辞書順最大の文字の次の文字までとする
+  for(char c = 'a'; c <= static_cast<char>(*(--(end(st))) + 1); c++) dfs(s + c);
 }
 
 int main() {
   cin >> n;
 
+  // 標準形なら1文字目は必ず'a'
   dfs("a");
 
   return 0;

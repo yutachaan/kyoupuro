@@ -42,36 +42,35 @@ bool chmin(T &a, const T& b) {
 
 
 int main() {
-  int n; cin >> n;
-  vs s(n);
-  fore(e, s) cin >> e;
+  int N; cin >> N;
+  vs S(N);
+  fore(s, S) cin >> s;
 
   bool ans = false;
-  // あるマスを基準として， 縦方向6マスまたは横方向6マスまたは斜め方向6マスに白いマスが4つ以上あるなら，true
-  rep(i, 0, n) rep(j, 0, n) {
-    // 下に6マス
-    if (i + 5 < n) {
-      int c = 0;
-      rep(k, 0, 6) if (s[i + k][j] == '#') c++;
-      if (c >= 4) ans = true;
+  rep(i, 0, N) rep(j, 0, N) {
+    // 下方向に6マス見て， 白のマスが2つ以内ならそれを塗り替えることで黒を6つ連続させられる
+    if (i + 5 < N) {
+      int white = 0;
+      rep(d, 0, 6) if (S[i + d][j] == '.') white++;
+      if (white <= 2) ans = true;
     }
-    // 右に6マス
-    if (j + 5 < n) {
-      int c = 0;
-      rep(k, 0, 6) if (s[i][j + k] == '#') c++;
-      if (c >= 4) ans = true;
+    // 右方向に6マスで同様に
+    if (j + 5 < N) {
+      int white = 0;
+      rep(d, 0, 6) if (S[i][j + d] == '.') white++;
+      if (white <= 2) ans = true;
     }
-    // 右下に6マス
-    if (i + 5 < n && j + 5 < n) {
-      int c = 0;
-      rep(k, 0, 6) if (s[i + k][j + k] == '#') c++;
-      if (c >= 4) ans = true;
+    // 斜め右下方向に6マス
+    if (i + 5 < N && j + 5 < N) {
+      int white = 0;
+      rep(d, 0, 6) if (S[i + d][j + d] == '.') white++;
+      if (white <= 2) ans = true;
     }
-    // 右上に6マス
-    if (i - 5 >= 0 && j + 5 < n) {
-      int c = 0;
-      rep(k, 0, 6) if (s[i - k][j + k] == '#') c++;
-      if (c >= 4) ans = true;
+    // 斜め右上方向に6マス
+    if (i - 5 >= 0 && j + 5 < N) {
+      int white = 0;
+      rep(d, 0, 6) if (S[i - d][j + d] == '.') white++;
+      if (white <= 2) ans = true;
     }
   }
 

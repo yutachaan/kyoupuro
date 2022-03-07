@@ -42,21 +42,22 @@ bool chmin(T &a, const T& b) {
 
 
 int main() {
-  int n, k; cin >> n >> k;
-  vi p(n, 0), q(n);
-  rep(i, 0, n) rep(j, 0, 3) {
-    int a; cin >> a;
-    p[i] += a;
+  int N, K; cin >> N >> K;
+
+  // 3日目までの得点の合計
+  vi P(N);
+  rep(i, 0, N) {
+    int P1, P2, P3; cin >> P1 >> P2 >> P3;
+    P[i] = P1 + P2 + P3;
   }
 
-  copy(ALL(p), back_inserter(q));
+  vi Pcopy(N);
+  copy(ALL(P), back_inserter(Pcopy));
+  sort(ALL(Pcopy), greater<int>());
 
-  // K番目に大きい値
-  sort(ALL(q), greater<int>());
-  int s =q[k - 1];
-
-  // 3日目までの点数に300点を足した点数が，K番目に大きい点数以上ならYes
-  fore(e, p) YesNo(e + 300 >= s);
+  // 一人だけ300点をとって，他が全員0点の場合に， K位以内に入れば良い
+  fore(p, P) YesNo(p + 300 >= Pcopy[K - 1]);
 
   return 0;
 }
+

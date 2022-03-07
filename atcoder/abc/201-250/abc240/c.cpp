@@ -1,4 +1,3 @@
-// x
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -43,21 +42,22 @@ bool chmin(T &a, const T& b) {
 
 
 int main() {
-  int n, x; cin >> n >> x;
-  vi a(n), b(n);
-  rep(i, 0, n) cin >> a[i] >> b[i];
+  int N, X; cin >> N >> X;
+  vi a(N), b(N);
+  rep(i, 0, N) cin >> a[i] >> b[i];
 
-  vector<vector<bool>> dp(n + 1, vector<bool>(x + 1, false)); // dp[i + 1][j]: i回ジャンプを行った時点で，座標jにいるかどうか
+  vector<vector<bool>> dp(N + 1, vector<bool>(X + 1, false)); // dp[i + 1][j]: i回目のジャンプの後に座標jにいることが可能か
   dp[0][0] = true;
 
-  rep(i, 0, n) rep(j, 0, x + 1) {
+  rep(i, 0, N) rep(j, 0, X + 1) {
+    // 前のジャンプで座標jにいる場合
     if (dp[i][j]) {
-      if (j + a[i] <= x) dp[i + 1][j + a[i]] = true;
-      if (j + b[i] <= x) dp[i + 1][j + b[i]] = true;
+      if (j + a[i] <= X) dp[i + 1][j + a[i]] = true;
+      if (j + b[i] <= X) dp[i + 1][j + b[i]] = true;
     }
   }
 
-  YesNo(dp[n][x]);
+  YesNo(dp[N][X]);
 
   return 0;
 }

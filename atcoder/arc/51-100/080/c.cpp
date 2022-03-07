@@ -1,14 +1,5 @@
-// x
 #include <bits/stdc++.h>
 using namespace std;
-
-// <----- debug ----->
-#ifdef LOCAL
-#  include <debug_print.hpp>
-#  define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
-#else
-#  define debug(...) (static_cast<void>(0))
-#endif
 
 // <----- alias ----->
 using ll = long long;
@@ -18,23 +9,18 @@ const ll infl = numeric_limits<ll>::max()  / 2;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
-using vl  = vector<ll>;
-using vvl = vector<vl>;
 using vs  = vector<string>;
 using pii = pair<int, int>;
-using mii = map<int, int>;
-using msi = map<string, int>;
-using si  = set<int>;
-using ss  = set<string>;
 
 #define endl "\n";
 
-// <----- REPマクロ ----->
+// <----- rep macro ----->
 #define rep(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
 #define rrep(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
-#define foreach(e, x) for (auto&& (e): x)
+#define fore(e, x) for (auto &&(e): x)
+#define fore2(k, v, x) for (auto &&[k, v]: x)
 
-// <----- 略記 ----->
+// <----- other macro ----->
 #define ALL(x) begin((x)), end((x))
 #define SIZE(x) ll((x).size())
 
@@ -56,25 +42,20 @@ bool chmin(T &a, const T& b) {
 
 
 int main() {
-  int n; cin >> n;
-  vi a(n);
-  foreach(e, a) cin >> e;
+  int N; cin >> N;
+  vi a(N);
+  rep(i, 0, N) cin >> a[i];
 
-  int c = 0, c2 = 0, c4 = 0;
-  rep(i, 0, n) {
-    if (a[i] % 4 == 0) c4++;
-    else if (a[i] % 2 == 0) c2++;
-    else c++;
+  // 4の倍数の個数と， 4の倍数ではないが2の倍数の個数をカウント
+  int mul4 = 0, mul2 = 0;
+  rep(i, 0, N) {
+    if (a[i] % 4 == 0) mul4++;
+    else if (a[i] % 2 == 0) mul2++;
   }
 
-  bool ok;
-  if (c4 + 1 == c) {
-    if (c2 == 0) ok = true;
-    else ok = false;
-  }
-  else ok = c4 >= c;
-
-  YesNo(ok);
+  // 4の倍数が N // 2個以上あればクリア
+  // 4の倍数が足りなくても， 2の倍数がN - 2 * 4の倍数の個数 以上あればクリア
+  YesNo((mul4 >= N / 2) || (mul2 >= N - 2 * mul4));
 
   return 0;
 }

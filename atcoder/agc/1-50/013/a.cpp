@@ -1,14 +1,5 @@
-// x
 #include <bits/stdc++.h>
 using namespace std;
-
-// <----- debug ----->
-#ifdef LOCAL
-#  include <debug_print.hpp>
-#  define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
-#else
-#  define debug(...) (static_cast<void>(0))
-#endif
 
 // <----- alias ----->
 using ll = long long;
@@ -18,23 +9,18 @@ const ll infl = numeric_limits<ll>::max()  / 2;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
-using vl  = vector<ll>;
-using vvl = vector<vl>;
 using vs  = vector<string>;
 using pii = pair<int, int>;
-using mii = map<int, int>;
-using msi = map<string, int>;
-using si  = set<int>;
-using ss  = set<string>;
 
 #define endl "\n";
 
-// <----- REPマクロ ----->
+// <----- rep macro ----->
 #define rep(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
 #define rrep(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
-#define foreach(e, x) for (auto&& (e): x)
+#define fore(e, x) for (auto &&(e): x)
+#define fore2(k, v, x) for (auto &&[k, v]: x)
 
-// <----- 略記 ----->
+// <----- other macro ----->
 #define ALL(x) begin((x)), end((x))
 #define SIZE(x) ll((x).size())
 
@@ -58,19 +44,20 @@ bool chmin(T &a, const T& b) {
 int main() {
   int n; cin >> n;
   vi a(n);
-  foreach(e, a) cin >> e;
+  fore(e, a) cin >> e;
 
-  int ans = 0, i = 0;
+  int i = 0, ans = 0;
   while (i < n) {
-    // 単調非減少の間はjを増加
-    int j = i + 1;
-    while (a[j - 1] <= a[j]) j++;
+    // 単調非減少とした場合にiからどれだけ長くできるか
+    int zouka = i;
+    while (a[zouka] <= a[zouka + 1] && zouka < n) zouka++;
 
-    // 単調非増加の間はkを増加
-    int k = i + 1;
-    while (a[k - 1] >= a[k]) k++;
+    // 単調非増加とした場合にiからどれだけ長くできるか
+    int gensyou = i;
+    while (a[gensyou] >= a[gensyou + 1] && gensyou < n) gensyou++;
 
-    i += max(j, k) - i;
+    // より長くできたほうの分だけiを増やす
+    i += max(zouka, gensyou) - i + 1;
     ans++;
   }
 

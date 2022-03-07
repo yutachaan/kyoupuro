@@ -1,14 +1,5 @@
-// x
 #include <bits/stdc++.h>
 using namespace std;
-
-// <----- debug ----->
-#ifdef LOCAL
-#  include <debug_print.hpp>
-#  define debug(...) debug_print::multi_print(#__VA_ARGS__, __VA_ARGS__)
-#else
-#  define debug(...) (static_cast<void>(0))
-#endif
 
 // <----- alias ----->
 using ll = long long;
@@ -18,23 +9,18 @@ const ll infl = numeric_limits<ll>::max()  / 2;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
-using vl  = vector<ll>;
-using vvl = vector<vl>;
 using vs  = vector<string>;
 using pii = pair<int, int>;
-using mii = map<int, int>;
-using msi = map<string, int>;
-using si  = set<int>;
-using ss  = set<string>;
 
 #define endl "\n";
 
-// <----- REPマクロ ----->
+// <----- rep macro ----->
 #define rep(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
 #define rrep(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
-#define foreach(e, x) for (auto&& (e): x)
+#define fore(e, x) for (auto &&(e): x)
+#define fore2(k, v, x) for (auto &&[k, v]: x)
 
-// <----- 略記 ----->
+// <----- other macro ----->
 #define ALL(x) begin((x)), end((x))
 #define SIZE(x) ll((x).size())
 
@@ -58,20 +44,19 @@ bool chmin(T &a, const T& b) {
 int main() {
   int n; cin >> n;
   vi a(n), b(n), c(n);
-  foreach(e, a) cin >> e;
-  foreach(e, b) cin >> e;
-  foreach(e, c) cin >> e;
+  fore(e, a) cin >> e;
+  fore(e, b) cin >> e;
+  fore(e, c) cin >> e;
 
   sort(ALL(a));
   sort(ALL(c));
 
-  // 中部を全探索
   ll ans = 0;
   rep(i, 0, n) {
-    int ok_a = lower_bound(ALL(a), b[i]) - begin(a);       // b[i]未満のaの数
-    int ok_c = n - (upper_bound(ALL(c), b[i]) - begin(c)); // b[i]より大きいcの数
+    ll ue = lower_bound(ALL(a), b[i]) - begin(a);         // b[i]より小さい上部のパーツの個数
+    ll sita = n - (upper_bound(ALL(c), b[i]) - begin(c)); // b[i]より大きい下部のパーツの個数
 
-    ans += (ll) ok_a * ok_c;
+    ans += ue * sita;
   }
 
   cout << ans << endl;
