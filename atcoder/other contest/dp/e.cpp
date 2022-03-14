@@ -1,3 +1,4 @@
+// x
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -42,17 +43,23 @@ inline bool chmin(T &a, T b) {
 
 
 int main() {
-  int N; cin >> N;
+  int N, W; cin >> N >> W;
+  vi w(N + 1), v(N + 1);
+  rep(i, 1, N + 1) cin >> w[i] >> v[i]; // 1-index (0日目を考慮するため)
 
-  vi dp(N + 1, inf); // dp[i]: i円を引き出すのに必要な操作の最小回数
-  dp[0] = 0;
+  vector<vector<ll>> dp(N + 1, vector<ll>(100001, infl)); // dp[i][j]: i個の品物のうち価値がjとなるようにいくつかを選んだときの， 重さの総和の最小値
+  dp[0][0] = 0;
 
-  rep(i, 0, N) {
-    for (int i6 = 1; i + i6 <= N; i6 *= 6) chmin(dp[i + i6], dp[i] + 1);
-    for (int i9 = 1; i + i9 <= N; i9 *= 9) chmin(dp[i + i9], dp[i] + 1);
+  rep(i, 1, N + 1) rep(j, 0, 100001) {
+    // dp[i][j] = min(dp[i - 1][j], dp[i - 1][j - v[i]] + w[i])
+    chmin(dp[i][j], dp[i - 1][j]);                                  // i個目の品物を選ばない場合
+    if (j - v[i] >= 0) chmin(dp[i][j], dp[i - 1][j - v[i]] + w[i]); // i個目の品物を選ぶ場合
   }
 
-  cout << dp[N] << endl;
+  // 価値が大きいところから見ていき，最初にW以下になったところが答え
+  int ans = 100000;
+  while (dp[N][ans] > W) ans--;
+  cout << ans << endl;
 
   return 0;
 }

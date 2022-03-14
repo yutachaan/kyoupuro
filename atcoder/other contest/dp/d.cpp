@@ -42,17 +42,19 @@ inline bool chmin(T &a, T b) {
 
 
 int main() {
-  int N; cin >> N;
+  int N, W; cin >> N >> W;
+  vi w(N + 1), v(N + 1);
+  rep(i, 1, N + 1) cin >> w[i] >> v[i]; // 1-index (0日目を考慮するため)
 
-  vi dp(N + 1, inf); // dp[i]: i円を引き出すのに必要な操作の最小回数
-  dp[0] = 0;
+  vector<vector<ll>> dp(N + 1, vector<ll>(W + 1, 0)); // dp[i][j]: i個の品物のうち重さがjを越えないようにいくつかを選んだときの， 品物の価値の総和の最大値
 
-  rep(i, 0, N) {
-    for (int i6 = 1; i + i6 <= N; i6 *= 6) chmin(dp[i + i6], dp[i] + 1);
-    for (int i9 = 1; i + i9 <= N; i9 *= 9) chmin(dp[i + i9], dp[i] + 1);
+  rep(i, 1, N + 1) rep(j, 1, W + 1) {
+    // dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - w[i]] + v[i])
+    chmax(dp[i][j], dp[i - 1][j]);                                  // i個目の品物を選ばない場合
+    if (j - w[i] >= 0) chmax(dp[i][j], dp[i - 1][j - w[i]] + v[i]); // i個目の品物を選ぶ場合
   }
 
-  cout << dp[N] << endl;
+  cout << dp[N][W] << endl;
 
   return 0;
 }

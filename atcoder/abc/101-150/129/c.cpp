@@ -41,16 +41,29 @@ inline bool chmin(T &a, T b) {
 }
 
 
+ll mod = 1000000007;
+
 int main() {
-  int N; cin >> N;
+  int N, M; cin >> N >> M;
+  vi a(M);
+  rep(i, 0, M) cin >> a[i];
 
-  vi dp(N + 1, inf); // dp[i]: i円を引き出すのに必要な操作の最小回数
-  dp[0] = 0;
+  vi dp(N + 1, 0); // dp[i]: i段目にたどりつくまでの移動方法 (% mod)
+  dp[0] = 1;
 
-  rep(i, 0, N) {
-    for (int i6 = 1; i + i6 <= N; i6 *= 6) chmin(dp[i + i6], dp[i] + 1);
-    for (int i9 = 1; i + i9 <= N; i9 *= 9) chmin(dp[i + i9], dp[i] + 1);
+  rep(i, 0, M) dp[a[i]] = -1; // 壊れているところはいけないので-1
+
+  rep(i, 1, N + 1) {
+    if (dp[i] == -1) continue;
+
+    // dp[i] = dp[i - 1] + dp[i - 2]
+    // ただし， dp[i - 1]やdp[i - 2]が-1の場合は足さない
+    if (dp[i - 1] != -1) dp[i] += dp[i - 1];
+    if (i >= 2 && dp[i - 2] != -1) dp[i] += dp[i - 2];
+
+    dp[i] %= mod;
   }
+
 
   cout << dp[N] << endl;
 

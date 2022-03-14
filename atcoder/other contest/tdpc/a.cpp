@@ -1,3 +1,4 @@
+// x
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -43,16 +44,20 @@ inline bool chmin(T &a, T b) {
 
 int main() {
   int N; cin >> N;
+  vi p(N + 1);
+  rep(i, 1, N + 1) cin >> p[i]; // 1-index (0問目を考慮するため)
 
-  vi dp(N + 1, inf); // dp[i]: i円を引き出すのに必要な操作の最小回数
-  dp[0] = 0;
+  vector<vector<bool>> dp(N + 1, vector<bool>(10001, false)); // dp[i][j]: i問目まで解いた時j点をとることが可能か
+  dp[0][0] = true;
 
-  rep(i, 0, N) {
-    for (int i6 = 1; i + i6 <= N; i6 *= 6) chmin(dp[i + i6], dp[i] + 1);
-    for (int i9 = 1; i + i9 <= N; i9 *= 9) chmin(dp[i + i9], dp[i] + 1);
+  rep(i, 1, N + 1) rep(j, 0, 10001) {
+    dp[i][j] = dp[i - 1][j];                           // i問目を解かなかった場合
+    if (j - p[i] >= 0) dp[i][j] = dp[i][j] | dp[i - 1][j - p[i]]; // i問目を解いた場合
   }
 
-  cout << dp[N] << endl;
+  int ans = 0;
+  rep(j, 0, 10001) if (dp[N][j]) ans++;
+  cout << ans << endl;
 
   return 0;
 }

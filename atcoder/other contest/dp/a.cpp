@@ -43,16 +43,19 @@ inline bool chmin(T &a, T b) {
 
 int main() {
   int N; cin >> N;
+  vi h(N);
+  rep(i, 0, N) cin >> h[i];
 
-  vi dp(N + 1, inf); // dp[i]: i円を引き出すのに必要な操作の最小回数
+  vi dp(N, inf); // dp[i]: 足場iに辿り着くまでに支払うコストの総和の最小値 (0-index)
   dp[0] = 0;
 
-  rep(i, 0, N) {
-    for (int i6 = 1; i + i6 <= N; i6 *= 6) chmin(dp[i + i6], dp[i] + 1);
-    for (int i9 = 1; i + i9 <= N; i9 *= 9) chmin(dp[i + i9], dp[i] + 1);
+  rep(i, 1, N) {
+    // dp[i] = min(dp[i - 1] + |h[i] - h[i - 1]|, dp[i - 2] + |h[i] - h[i - 2]|)
+    chmin(dp[i], dp[i - 1] + abs(h[i] - h[i - 1]));
+    if (i >= 2) chmin(dp[i], dp[i - 2] + abs(h[i] - h[i - 2]));
   }
 
-  cout << dp[N] << endl;
+  cout << dp[N - 1] << endl;
 
   return 0;
 }

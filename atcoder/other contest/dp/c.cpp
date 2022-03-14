@@ -43,16 +43,20 @@ inline bool chmin(T &a, T b) {
 
 int main() {
   int N; cin >> N;
+  vvi koudou(N, vi(3));
+  rep(i, 0, N) rep(j, 0, 3) cin >> koudou[i][j];
 
-  vi dp(N + 1, inf); // dp[i]: i円を引き出すのに必要な操作の最小回数
-  dp[0] = 0;
+  vvi dp(N, vi(3, 0)); // dp[i][j]: i日目に行動j(j = 0: A, 1: B, 2: C)をしたときの， i日目までの幸福度の総和の最大値 (0-index)
+  rep(j, 0, 3) dp[0][j] = koudou[0][j]; // 初日は前日の行動に影響を受けない
 
-  rep(i, 0, N) {
-    for (int i6 = 1; i + i6 <= N; i6 *= 6) chmin(dp[i + i6], dp[i] + 1);
-    for (int i9 = 1; i + i9 <= N; i9 *= 9) chmin(dp[i + i9], dp[i] + 1);
+  rep(i, 1, N) rep(j, 0, 3) rep(k, 0, 3) {
+    // 前日の行動kと違う行動をするときのみ考える
+    if (j != k) chmax(dp[i][j], dp[i - 1][k] + koudou[i][j]);
   }
 
-  cout << dp[N] << endl;
+  int ans = 0;
+  rep(j, 0, 3) chmax(ans, dp[N - 1][j]);
+  cout << ans << endl;
 
   return 0;
 }
