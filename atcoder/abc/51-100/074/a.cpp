@@ -1,5 +1,3 @@
-#define _GLIBCXX_DEBUG
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -14,9 +12,11 @@ using vvi = vector<vi>;
 using vs  = vector<string>;
 using pii = pair<int, int>;
 
+#define endl "\n";
+
 // <----- rep macro ----->
-#define rep(i, a, b)  for (int i = (a); i < (int)(b); i++)
-#define rrep(i, a, b) for (int i = (a) - 1; i >= (int)(b); i--)
+#define rep(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
+#define rrep(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
 #define fore(e, x) for (auto &&(e): x)
 #define fore2(k, v, x) for (auto &&[k, v]: x)
 
@@ -42,22 +42,7 @@ inline bool chmin(T &a, T b) {
 
 
 int main() {
-  int N; cin >> N;
-  map<string, int> count_s;
-  rep(i, 0, N) {
-    string s; cin >> s;
-    count_s[s]++;
-  }
+  int N, A; cin >> N >> A;
 
-  int M; cin >> M;
-  map<string, int> count_t;
-  rep(i, 0, M) {
-    string t; cin >> t;
-    count_t[t]++;
-  }
-
-  int ans = 0; // マイナスになるなら， お金をもらえないけど減りもしない単語を言えばよいため，最小で0
-  fore2(str, n, count_s) chmax(ans, n - count_t[str]);
-
-  cout << ans << endl;
+  cout << N * N - A << endl;
 }

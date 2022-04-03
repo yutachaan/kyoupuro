@@ -1,3 +1,5 @@
+#define _GLIBCXX_DEBUG
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -12,11 +14,9 @@ using vvi = vector<vi>;
 using vs  = vector<string>;
 using pii = pair<int, int>;
 
-#define endl "\n";
-
 // <----- rep macro ----->
-#define rep(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
-#define rrep(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
+#define rep(i, a, b)  for (int i = (a); i < (int)(b); i++)
+#define rrep(i, a, b) for (int i = (a) - 1; i >= (int)(b); i--)
 #define fore(e, x) for (auto &&(e): x)
 #define fore2(k, v, x) for (auto &&[k, v]: x)
 
@@ -42,6 +42,4 @@ inline bool chmin(T &a, T b) {
 
 
 int main() {
-
-  return 0;
 }

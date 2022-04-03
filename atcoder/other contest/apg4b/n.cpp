@@ -43,21 +43,14 @@ inline bool chmin(T &a, T b) {
 
 int main() {
   int N; cin >> N;
-  map<string, int> count_s;
+  vi A(N);
+  rep(i, 0, N) cin >> A[i];
+
+  int ave = 0;
+  rep(i, 0, N) ave += A[i];
+  ave /= N;
+
   rep(i, 0, N) {
-    string s; cin >> s;
-    count_s[s]++;
+    cout << abs(ave - A[i]) << endl;
   }
-
-  int M; cin >> M;
-  map<string, int> count_t;
-  rep(i, 0, M) {
-    string t; cin >> t;
-    count_t[t]++;
-  }
-
-  int ans = 0; // マイナスになるなら， お金をもらえないけど減りもしない単語を言えばよいため，最小で0
-  fore2(str, n, count_s) chmax(ans, n - count_t[str]);
-
-  cout << ans << endl;
 }

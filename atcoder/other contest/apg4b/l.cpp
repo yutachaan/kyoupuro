@@ -1,5 +1,3 @@
-#define _GLIBCXX_DEBUG
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -42,22 +40,22 @@ inline bool chmin(T &a, T b) {
 
 
 int main() {
-  int N; cin >> N;
-  map<string, int> count_s;
+  int N, A; cin >> N >> A;
+
   rep(i, 0, N) {
-    string s; cin >> s;
-    count_s[s]++;
+    char op;
+    int B;
+    cin >> op >> B;
+
+    if (op == '+') A += B;
+    else if (op == '-') A -= B;
+    else if (op == '*') A *= B;
+    else if (op == '/' && B != 0) A /= B;
+    else {
+      cout << "error" << endl;
+      break;
+    }
+
+    cout << i + 1 << ':' << A << endl;
   }
-
-  int M; cin >> M;
-  map<string, int> count_t;
-  rep(i, 0, M) {
-    string t; cin >> t;
-    count_t[t]++;
-  }
-
-  int ans = 0; // マイナスになるなら， お金をもらえないけど減りもしない単語を言えばよいため，最小で0
-  fore2(str, n, count_s) chmax(ans, n - count_t[str]);
-
-  cout << ans << endl;
 }

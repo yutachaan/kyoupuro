@@ -1,60 +1,58 @@
+#define _GLIBCXX_DEBUG
+
 #include <bits/stdc++.h>
 using namespace std;
 
 // <----- alias ----->
 using ll = long long;
 
-const int inf = INT_MAX / 2;
-const ll infl = 1LL << 60;
+const int inf = numeric_limits<int>::max() / 2;
+const ll infl = numeric_limits<ll>::max()  / 2;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
 using vs  = vector<string>;
 using pii = pair<int, int>;
-using mii = map<int, int>;
-using msi = map<string, int>;
 
-// <----- REPマクロ ----->
-#define FOR(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
-#define RFOR(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
-#define REP(i, n)     FOR(i, 0, n)
-#define REPS(i, n)    FOR(i, 1, n + 1)
-#define RREP(i, n)    RFOR(i, n, 0)
-#define RREPS(i, n)   RFOR(i, n + 1, 1)
-#define FOREACH(e, x) for (auto&& (e): x)
+// <----- rep macro ----->
+#define rep(i, a, b)  for (int i = (a); i < (int)(b); i++)
+#define rrep(i, a, b) for (int i = (a) - 1; i >= (int)(b); i--)
+#define fore(e, x) for (auto &&(e): x)
+#define fore2(k, v, x) for (auto &&[k, v]: x)
 
-// <----- 略記 ----->
-#define ALL(x) (x).begin(), (x).end()
+// <----- other macro ----->
+#define ALL(x) begin((x)), end((x))
 #define SIZE(x) ll((x).size())
 
-#define YESNO(n) cout << ((n) ? "YES" : "NO") << endl
-#define yesno(n) cout << ((n) ? "yes" : "no") << endl
-#define YesNo(n) cout << ((n) ? "Yes" : "No") << endl
+#define YESNO(n) cout << ((n) ? "YES" : "NO") << "\n"
+#define yesno(n) cout << ((n) ? "yes" : "no") << "\n"
+#define YesNo(n) cout << ((n) ? "Yes" : "No") << "\n"
 
 // <----- function ----->
-template <class T> bool chmin(T& a, const T& b) {if (a > b) a = b; return a > b;}
-template <class T> bool chmax(T& a, const T& b) {if (a < b) a = b; return a < b;}
-
-// <----- other ----->
-const int dx[4] = {1, 0, -1, 0};
-const int dy[4] = {0, 1, 0, -1};
+template <class T>
+inline bool chmax(T &a, T b) {
+  if (a < b) {a = b; return true;}
+  return false;
+}
+template <class T>
+inline bool chmin(T &a, T b) {
+  if (a > b) {a = b; return true;}
+  return false;
+}
 
 
 int main() {
-  int n;
-  cin >> n;
+  int N; cin >> N;
+  vi a(N);
+  rep(i, 0, N) cin >> a[i];
 
-  vi a(n);
-  REP(i, n) cin >> a[i];
   sort(ALL(a), greater<int>());
 
-  int ans = 0;
-  REP(i, n) {
-    if (i % 2) ans -= a[i];
-    else ans += a[i];
+  int alice = 0, bob = 0;
+  rep(i, 0, N) {
+    if (i % 2 == 0) alice += a[i];
+    else bob += a[i];
   }
 
-  cout << ans << endl;
-
-  return 0;
+  cout << alice - bob << endl;
 }
