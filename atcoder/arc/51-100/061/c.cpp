@@ -44,24 +44,20 @@ inline bool chmin(T &a, T b) {
 int main() {
   string S; cin >> S;
 
+  ll ans = 0;
   rep(bit, 0, 1 << SIZE(S) - 1) {
-    int sum = S[0] - '0';
-    string ans = {S[0]};
+    ll sum = 0, temp = S[0] - '0';
     rep(i, 0, SIZE(S) - 1) {
       if (bit & (1 << i)) {
-        sum += S[i + 1] - '0';
-        ans += {'+', S[i + 1]};
+        sum += temp;
+        temp = 0;
       }
-      else {
-        sum -= S[i + 1] - '0';
-        ans += {'-', S[i + 1]};
-      }
+      temp = temp * 10 + S[i + 1] - '0';
     }
+    sum += temp;
 
-    if (sum == 7) {
-      ans += "=7";
-      cout << ans << endl;
-      return 0;
-    }
+    ans += sum;
   }
+
+  cout << ans << endl;
 }

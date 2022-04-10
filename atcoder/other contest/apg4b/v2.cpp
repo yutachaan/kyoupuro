@@ -41,27 +41,25 @@ inline bool chmin(T &a, T b) {
 }
 
 
+int N;
+vvi children;
+
+int dfs(int i) {
+  if (SIZE(children[i]) == 0) return 1;
+
+  int ans = 0;
+  fore(c, children[i]) ans += dfs(c);
+
+  return ans + 1;
+}
+
 int main() {
-  string S; cin >> S;
-
-  rep(bit, 0, 1 << SIZE(S) - 1) {
-    int sum = S[0] - '0';
-    string ans = {S[0]};
-    rep(i, 0, SIZE(S) - 1) {
-      if (bit & (1 << i)) {
-        sum += S[i + 1] - '0';
-        ans += {'+', S[i + 1]};
-      }
-      else {
-        sum -= S[i + 1] - '0';
-        ans += {'-', S[i + 1]};
-      }
-    }
-
-    if (sum == 7) {
-      ans += "=7";
-      cout << ans << endl;
-      return 0;
-    }
+  cin >> N;
+  children.resize(N);
+  rep(i, 1, N) {
+    int p; cin >> p;
+    children[p].push_back(i);
   }
+
+  rep(i, 0, N) cout << dfs(i) << endl;
 }

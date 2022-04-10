@@ -17,16 +17,16 @@ using pii = pair<int, int>;
 // <----- rep macro ----->
 #define rep(i, a, b)  for (int i = (a); i < (int)(b); i++)
 #define rrep(i, a, b) for (int i = (a) - 1; i >= (int)(b); i--)
-#define fore(e, x) for (auto &&(e): x)
-#define fore2(k, v, x) for (auto &&[k, v]: x)
+#define fore(e, x) for (auto &(e): x)
+#define fore2(k, v, x) for (auto &[k, v]: x)
 
 // <----- other macro ----->
 #define ALL(x) begin((x)), end((x))
 #define SIZE(x) ll((x).size())
 
-#define YESNO(n) cout << ((n) ? "YES" : "NO") << "\n"
-#define yesno(n) cout << ((n) ? "yes" : "no") << "\n"
-#define YesNo(n) cout << ((n) ? "Yes" : "No") << "\n"
+#define YESNO(n) cout << ((n) ? "YES" : "NO") << endl
+#define yesno(n) cout << ((n) ? "yes" : "no") << endl
+#define YesNo(n) cout << ((n) ? "Yes" : "No") << endl
 
 // <----- function ----->
 template <class T>
