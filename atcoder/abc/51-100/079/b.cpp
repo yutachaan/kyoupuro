@@ -11,10 +11,7 @@ const ll infl = numeric_limits<ll>::max()  / 2;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
-using vl  = vector<ll>;
 using vs  = vector<string>;
-using vb  = vector<bool>;
-using vvb = vector<vb>;
 using pii = pair<int, int>;
 
 // <----- rep macro ----->
@@ -44,5 +41,18 @@ inline bool chmin(T &a, T b) {
 }
 
 
+vector<ll> l(100, -1);
+
+ll lucas(int n) {
+  if (n == 0) return 2;
+  if (n == 1) return 1;
+  if (l[n] != -1) return l[n];
+
+  return l[n] = lucas(n - 1) + lucas(n - 2);
+}
+
 int main() {
+  int N; cin >> N;
+
+  cout << lucas(N) << endl;
 }

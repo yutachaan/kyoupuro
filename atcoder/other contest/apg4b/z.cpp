@@ -45,4 +45,11 @@ inline bool chmin(T &a, T b) {
 
 
 int main() {
+  int N; cin >> N;
+  vector<pii> ba(N);
+  fore(x, ba) cin >> x.second >> x.first;
+
+  sort(ALL(ba));
+
+  fore(x, ba) cout << x.second << ' ' << x.first << endl;
 }

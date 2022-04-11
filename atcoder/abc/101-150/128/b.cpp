@@ -45,4 +45,19 @@ inline bool chmin(T &a, T b) {
 
 
 int main() {
+  int N; cin >> N;
+  map<string, vector<pii>> mp;
+  rep(i, 0, N) {
+    string S; int P; cin >> S >> P;
+
+    mp[S].push_back(pii(P, i + 1));
+  }
+
+  // mapはkeyでsortされているのでそれを利用
+  fore2(city, rest, mp) {
+    // 点数でsort
+    sort(ALL(rest), greater<pii>());
+
+    fore2(p, i, rest) cout << i << endl;
+  }
 }

@@ -1,30 +1,30 @@
+#define _GLIBCXX_DEBUG
+
 #include <bits/stdc++.h>
 using namespace std;
 
 // <----- alias ----->
 using ll = long long;
 
-const int inf = INT_MAX / 2;
-const ll infl = 1LL << 60;
+const int inf = numeric_limits<int>::max() / 2;
+const ll infl = numeric_limits<ll>::max()  / 2;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
 using vl  = vector<ll>;
-using vvl = vector<vl>;
 using vs  = vector<string>;
+using vb  = vector<bool>;
+using vvb = vector<vb>;
 using pii = pair<int, int>;
-using mii = map<int, int>;
-using msi = map<string, int>;
-using si  = set<int>;
-using ss  = set<string>;
 
-// <----- REPマクロ ----->
-#define rep(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
-#define rrep(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
-#define foreach(e, x) for (auto&& (e): x)
+// <----- rep macro ----->
+#define rep(i, a, b)  for (int i = (a); i < (int)(b); i++)
+#define rrep(i, a, b) for (int i = (a) - 1; i >= (int)(b); i--)
+#define fore(e, x) for (auto &(e): x)
+#define fore2(k, v, x) for (auto &[k, v]: x)
 
-// <----- 略記 ----->
-#define ALL(x) (x).begin(), (x).end()
+// <----- other macro ----->
+#define ALL(x) begin((x)), end((x))
 #define SIZE(x) ll((x).size())
 
 #define YESNO(n) cout << ((n) ? "YES" : "NO") << endl
@@ -32,45 +32,42 @@ using ss  = set<string>;
 #define YesNo(n) cout << ((n) ? "Yes" : "No") << endl
 
 // <----- function ----->
-template <typename T>
-bool chmax(T &a, const T& b) {
+template <class T>
+inline bool chmax(T &a, T b) {
   if (a < b) {a = b; return true;}
   return false;
 }
-template <typename T>
-bool chmin(T &a, const T& b) {
+template <class T>
+inline bool chmin(T &a, T b) {
   if (a > b) {a = b; return true;}
   return false;
 }
 
 
 int main() {
-  // 入力
-  int n, m; cin >> n >> m;
-  vvi G(n);
-  rep(i, 0, m) {
+  int N, M; cin >> N >> M;
+  vvi G(N);
+  rep(i, 0, M) {
     int a, b; cin >> a >> b;
-    a--; b--; // 0-index
+    a--; b--;
     G[a].push_back(b);
     G[b].push_back(a);
   }
 
-  vi p(n);
-  rep(i, 0, n) p[i] = i;
   int ans = 0;
+  vi a(N);
+  rep(i, 0, N) a[i] = i;
   do {
-    if (p[0] != 0) continue; // 始点が0でないならcontinue
+    if (a[0] != 0) continue; // 始点は1
 
-    // 次の点との間に辺があるか調べる
+    // 辺があるか調べる
     bool ok = true;
-    rep(i, 0, n - 1) {
-      if (find(ALL(G[p[i]]), p[i + 1]) == G[p[i]].end()) ok = false;
+    rep(i, 1, N) {
+      if (count(ALL(G[a[i - 1]]), a[i]) == 0) ok = false;
     }
 
-    if (ok) ans++; // 全ての点がつながっていたらok
-  } while (next_permutation(ALL(p)));
+    if (ok) ans++;
+  } while (next_permutation(ALL(a)));
 
   cout << ans << endl;
-
-  return 0;
 }

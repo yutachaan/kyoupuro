@@ -45,4 +45,21 @@ inline bool chmin(T &a, T b) {
 
 
 int main() {
+  int N; cin >> N;
+  map<int, int> count;
+  rep(i, 0, N) {
+    int A; cin >> A;
+
+    count[A]++;
+  }
+
+  int ans_v, ans_c = 0;
+  fore2(v, c, count) {
+    if (c > ans_c) {
+      ans_c = c;
+      ans_v = v;
+    }
+  }
+
+  cout << ans_v << ' ' << ans_c << endl;
 }
