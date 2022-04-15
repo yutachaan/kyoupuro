@@ -1,3 +1,5 @@
+#define _GLIBCXX_DEBUG
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -9,33 +11,34 @@ const ll infl = numeric_limits<ll>::max()  / 2;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
+using vl  = vector<ll>;
 using vs  = vector<string>;
+using vb  = vector<bool>;
+using vvb = vector<vb>;
 using pii = pair<int, int>;
 
-#define endl "\n";
-
 // <----- rep macro ----->
-#define rep(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
-#define rrep(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
-#define fore(e, x) for (auto &&(e): x)
-#define fore2(k, v, x) for (auto &&[k, v]: x)
+#define rep(i, a, b)  for (int i = (a); i < (int)(b); i++)
+#define rrep(i, a, b) for (int i = (a) - 1; i >= (int)(b); i--)
+#define fore(e, x) for (auto &(e): x)
+#define fore2(k, v, x) for (auto &[k, v]: x)
 
 // <----- other macro ----->
 #define ALL(x) begin((x)), end((x))
 #define SIZE(x) ll((x).size())
 
-#define YESNO(n) cout << ((n) ? "YES" : "NO") << "\n"
-#define yesno(n) cout << ((n) ? "yes" : "no") << "\n"
-#define YesNo(n) cout << ((n) ? "Yes" : "No") << "\n"
+#define YESNO(n) cout << ((n) ? "YES" : "NO") << endl
+#define yesno(n) cout << ((n) ? "yes" : "no") << endl
+#define YesNo(n) cout << ((n) ? "Yes" : "No") << endl
 
 // <----- function ----->
-template <class T>
-inline bool chmax(T &a, T b) {
+template <typename T>
+bool chmax(T &a, T b) {
   if (a < b) {a = b; return true;}
   return false;
 }
-template <class T>
-inline bool chmin(T &a, T b) {
+template <typename T>
+bool chmin(T &a, T b) {
   if (a > b) {a = b; return true;}
   return false;
 }
@@ -44,21 +47,16 @@ inline bool chmin(T &a, T b) {
 int main() {
   int N, K; cin >> N >> K;
   vi A(N), B(N);
-  rep(i, 0, N) cin >> A[i];
-  rep(i, 0, N) cin >> B[i];
+  fore(x, A) cin >> x;
+  fore(x, B) cin >> x;
 
-  vector<bool> dpA(N, false), dpB(N, false); // dpA[i]: X_0, ... X_i - 1 まで考慮した時， X_i = A_i としてよいか
-  dpA[0] = true, dpB[0] = true;
+  vb dpA(N, false); // dpA[i]: (X1, ..., Xi) まで考慮した時， Xi = Aiとしてよいか
+  vb dpB(N, false); // dpB[i]: (X1, ..., Xi) まで考慮した時， Xi = ABiとしてよいか
+  dpA[0] = true; dpB[0] = true;
 
   rep(i, 1, N) {
-    if (dpA[i - 1]) {
-      if (abs(A[i - 1] - A[i]) <= K) dpA[i] = true;
-      if (abs(A[i - 1] - B[i]) <= K) dpB[i] = true;
-    }
-    if (dpB[i - 1]) {
-      if (abs(B[i - 1] - A[i]) <= K) dpA[i] = true;
-      if (abs(B[i - 1] - B[i]) <= K) dpB[i] = true;
-    }
+    dpA[i] = (dpA[i - 1] && abs(A[i] - A[i - 1]) <= K) || (dpB[i - 1] && abs(A[i] - B[i - 1]) <= K);
+    dpB[i] = (dpA[i - 1] && abs(B[i] - A[i - 1]) <= K) || (dpB[i - 1] && abs(B[i] - B[i - 1]) <= K);
   }
 
   YesNo(dpA[N - 1] || dpB[N - 1]);

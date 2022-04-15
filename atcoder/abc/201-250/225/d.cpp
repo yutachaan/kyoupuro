@@ -1,4 +1,5 @@
-// x
+#define _GLIBCXX_DEBUG
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -10,33 +11,34 @@ const ll infl = numeric_limits<ll>::max()  / 2;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
+using vl  = vector<ll>;
 using vs  = vector<string>;
+using vb  = vector<bool>;
+using vvb = vector<vb>;
 using pii = pair<int, int>;
 
-#define endl "\n";
-
 // <----- rep macro ----->
-#define rep(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
-#define rrep(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
-#define fore(e, x) for (auto &&(e): x)
-#define fore2(k, v, x) for (auto &&[k, v]: x)
+#define rep(i, a, b)  for (int i = (a); i < (int)(b); i++)
+#define rrep(i, a, b) for (int i = (a) - 1; i >= (int)(b); i--)
+#define fore(e, x) for (auto &(e): x)
+#define fore2(k, v, x) for (auto &[k, v]: x)
 
 // <----- other macro ----->
 #define ALL(x) begin((x)), end((x))
 #define SIZE(x) ll((x).size())
 
-#define YESNO(n) cout << ((n) ? "YES" : "NO") << "\n"
-#define yesno(n) cout << ((n) ? "yes" : "no") << "\n"
-#define YesNo(n) cout << ((n) ? "Yes" : "No") << "\n"
+#define YESNO(n) cout << ((n) ? "YES" : "NO") << endl
+#define yesno(n) cout << ((n) ? "yes" : "no") << endl
+#define YesNo(n) cout << ((n) ? "Yes" : "No") << endl
 
 // <----- function ----->
 template <typename T>
-bool chmax(T &a, const T& b) {
+bool chmax(T &a, T b) {
   if (a < b) {a = b; return true;}
   return false;
 }
 template <typename T>
-bool chmin(T &a, const T& b) {
+bool chmin(T &a, T b) {
   if (a > b) {a = b; return true;}
   return false;
 }
@@ -45,38 +47,42 @@ bool chmin(T &a, const T& b) {
 int main() {
   int N, Q; cin >> N >> Q;
 
-  vi front(N + 1, -1), back(N + 1, -1); // 電車iの前の電車と後ろの電車
-  rep(i, 0, Q) {
-    int c, x, y; cin >> c;
+  vi ushiro(N, -1), mae(N, -1); // 電車i (0-index) の後部あるいは前部に連結している電車の番号 (連結していない場合は-1)
 
-    if (c == 1) {
-      cin >> x >> y;
-      back[x] = y;
-      front[y] = x;
+  rep(_, 0, Q) {
+    int order; cin >> order;
+
+    if (order == 1) {
+      int x, y; cin >> x >> y;
+      x--; y--;
+
+      ushiro[x] = y;
+      mae[y] = x;
     }
-    else if (c == 2) {
-      cin >> x >> y;
-      back[x] = -1;
-      front[y] = -1;
+    else if (order == 2) {
+      int x, y; cin >> x >> y;
+      x--; y--;
+
+      ushiro[x] = mae[y] = -1;
     }
     else {
-      cin >> x;
+      int x; cin >> x;
+      x--;
 
-      // 先頭まで戻る
-      while (front[x] != -1) x = front[x];
+      // 先頭車両になるまで前に移動
+      while (mae[x] != -1) x = mae[x];
 
-      // つながっている電車を配列に入れていく
-      vi ans = {x};
-      while (back[x] != -1) {
-        x = back[x];
-        ans.push_back(x);
+      // 最後尾車両になるまでansに番号を追加しながら後ろに移動
+      vi ans;
+      while (x != -1) {
+        ans.push_back(x + 1);
+        x = ushiro[x];
       }
 
+      // 出力
       cout << SIZE(ans) << ' ';
       fore(e, ans) cout << e << ' ';
       cout << endl;
     }
   }
-
-  return 0;
 }

@@ -1,4 +1,5 @@
-// x
+#define _GLIBCXX_DEBUG
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -10,33 +11,34 @@ const ll infl = numeric_limits<ll>::max()  / 2;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
+using vl  = vector<ll>;
 using vs  = vector<string>;
+using vb  = vector<bool>;
+using vvb = vector<vb>;
 using pii = pair<int, int>;
 
-#define endl "\n";
-
 // <----- rep macro ----->
-#define rep(i, a, b)  for (ll i = (a); i < (ll)(b); i++)
-#define rrep(i, a, b) for (ll i = (a) - 1; i >= (b); i--)
-#define fore(e, x) for (auto &&(e): x)
-#define fore2(k, v, x) for (auto &&[k, v]: x)
+#define rep(i, a, b)  for (int i = (a); i < (int)(b); i++)
+#define rrep(i, a, b) for (int i = (a) - 1; i >= (int)(b); i--)
+#define fore(e, x) for (auto &(e): x)
+#define fore2(k, v, x) for (auto &[k, v]: x)
 
 // <----- other macro ----->
 #define ALL(x) begin((x)), end((x))
 #define SIZE(x) ll((x).size())
 
-#define YESNO(n) cout << ((n) ? "YES" : "NO") << "\n"
-#define yesno(n) cout << ((n) ? "yes" : "no") << "\n"
-#define YesNo(n) cout << ((n) ? "Yes" : "No") << "\n"
+#define YESNO(n) cout << ((n) ? "YES" : "NO") << endl
+#define yesno(n) cout << ((n) ? "yes" : "no") << endl
+#define YesNo(n) cout << ((n) ? "Yes" : "No") << endl
 
 // <----- function ----->
-template <class T>
-inline bool chmax(T &a, T b) {
+template <typename T>
+bool chmax(T &a, T b) {
   if (a < b) {a = b; return true;}
   return false;
 }
-template <class T>
-inline bool chmin(T &a, T b) {
+template <typename T>
+bool chmin(T &a, T b) {
   if (a > b) {a = b; return true;}
   return false;
 }
@@ -47,21 +49,23 @@ int main() {
   vector<double> A(N), B(N);
   rep(i, 0, N) cin >> A[i] >> B[i];
 
-  // ぶつかる時間
+  // 着火してから何秒後にぶつかるかを求める
   double t = 0;
   rep(i, 0, N) t += A[i] / B[i];
   t /= 2;
 
-  // 時刻tのときの位置
+  // t秒後に左から何cmの位置にいるかを求める
   double ans = 0;
   rep(i, 0, N) {
-    ans += min(A[i], t * B[i]);
-    t -= A[i] / B[i];
-
-    if (t <= 0) break;
+    if (A[i] / B[i] <= t) {
+      ans += A[i];
+      t -= A[i] / B[i];
+    }
+    else {
+      ans += B[i] * t;
+      t = 0;
+    }
   }
 
-  printf("%.15lf\n", ans);
-
-  return 0;
+  cout << fixed << setprecision(15) << ans << endl;
 }
