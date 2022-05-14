@@ -1,4 +1,4 @@
-#define _GLIBCXX_DEBUG
+// #define _GLIBCXX_DEBUG
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -50,8 +50,8 @@ int main() {
   fore(x, A) cin >> x;
   fore(x, B) cin >> x;
 
-  vb dpA(N, false); // dpA[i]: (X1, ..., Xi) まで考慮した時， Xi = Aiとしてよいか
-  vb dpB(N, false); // dpB[i]: (X1, ..., Xi) まで考慮した時， Xi = ABiとしてよいか
+  vb dpA(N, false); // X_i-1まで決まっている時 Xi=Aiとしてよいか
+  vb dpB(N, false); // X_i-1まで決まっている時 Xi=Biとしてよいか
   dpA[0] = true; dpB[0] = true;
 
   rep(i, 1, N) {

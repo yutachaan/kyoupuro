@@ -1,4 +1,4 @@
-// #define _GLIBCXX_DEBUG
+#define _GLIBCXX_DEBUG
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -45,17 +45,27 @@ bool chmin(T &a, T b) {
 
 
 int main() {
-  int N; cin >> N;
-  vvi A(N + 1, vi());
-  rep(i, 1, N + 1) {
-    int a; cin >> a;
-    A[a].push_back(i);
+  string S; cin >> S;
+
+  ll ans = 0;
+  // +をつけるかつけないかでbit全探索
+  rep(bit, 0, 1 << SIZE(S) - 1) {
+    string s = {S[0]}; // 1文字目を格納
+    rep(i, 0, SIZE(S) - 1) {
+      if (bit & (1 << i)) {
+        // +をつける場合， +の前までの数字をansに加える
+        ans += stoll(s);
+        s = S[i + 1];
+      }
+      else {
+        // つけない場合は数字を連結する
+        s += S[i + 1];
+      }
+    }
+
+    // 最後の数字を加える
+    ans += stoll(s);
   }
 
-  int Q; cin >> Q;
-  while (Q--) {
-    int L, R, X; cin >> L >> R >> X;
-
-    cout << lower_bound(ALL(A[X]), R + 1) - lower_bound(ALL(A[X]), L) << endl;
-  }
+  cout << ans << endl;
 }

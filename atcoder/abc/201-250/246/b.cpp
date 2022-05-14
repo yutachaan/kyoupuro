@@ -1,4 +1,4 @@
-#define _GLIBCXX_DEBUG
+// #define _GLIBCXX_DEBUG
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -11,42 +11,43 @@ const ll infl = numeric_limits<ll>::max()  / 2;
 
 using vi  = vector<int>;
 using vvi = vector<vi>;
+using vl  = vector<ll>;
 using vs  = vector<string>;
+using vb  = vector<bool>;
+using vvb = vector<vb>;
 using pii = pair<int, int>;
 
 // <----- rep macro ----->
 #define rep(i, a, b)  for (int i = (a); i < (int)(b); i++)
 #define rrep(i, a, b) for (int i = (a) - 1; i >= (int)(b); i--)
-#define fore(e, x) for (auto &&(e): x)
-#define fore2(k, v, x) for (auto &&[k, v]: x)
+#define fore(e, x) for (auto &(e): x)
+#define fore2(k, v, x) for (auto &[k, v]: x)
 
 // <----- other macro ----->
 #define ALL(x) begin((x)), end((x))
 #define SIZE(x) ll((x).size())
 
-#define YESNO(n) cout << ((n) ? "YES" : "NO") << "\n"
-#define yesno(n) cout << ((n) ? "yes" : "no") << "\n"
-#define YesNo(n) cout << ((n) ? "Yes" : "No") << "\n"
+#define YESNO(n) cout << ((n) ? "YES" : "NO") << endl
+#define yesno(n) cout << ((n) ? "yes" : "no") << endl
+#define YesNo(n) cout << ((n) ? "Yes" : "No") << endl
 
 // <----- function ----->
-template <class T>
-inline bool chmax(T &a, T b) {
+template <typename T>
+bool chmax(T &a, T b) {
   if (a < b) {a = b; return true;}
   return false;
 }
-template <class T>
-inline bool chmin(T &a, T b) {
+template <typename T>
+bool chmin(T &a, T b) {
   if (a > b) {a = b; return true;}
   return false;
 }
 
 
 int main() {
-  double A, B; cin >> A >> B;
+  int A, B; cin >> A >> B;
 
   double d = sqrt(A * A + B * B);
 
-  double x = A / d, y = B / d;
-
-  printf("%.12lf %.12lf\n", x, y);
+  cout << fixed << setprecision(12) << A / d << ' ' << B / d << endl;
 }
