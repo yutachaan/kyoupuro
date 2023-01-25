@@ -20,7 +20,7 @@ using pii = pair<int, int>;
 // <----- rep macro ----->
 #define rep(i, a, b)  for (int i = (a); i < (int)(b); i++)
 #define rrep(i, a, b) for (int i = (a) - 1; i >= (int)(b); i--)
-#define fore(e, x) for (auto &(e): x)
+#define fore(e, x) for (auto &e: x)
 #define fore2(k, v, x) for (auto &[k, v]: x)
 
 // <----- other macro ----->
