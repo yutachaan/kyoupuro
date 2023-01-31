@@ -12,19 +12,21 @@ const ll infl = numeric_limits<ll>::max()  / 2;
 using vi  = vector<int>;
 using vvi = vector<vi>;
 using vl  = vector<ll>;
+using vvl = vector<vl>;
 using vs  = vector<string>;
 using vb  = vector<bool>;
 using vvb = vector<vb>;
 using pii = pair<int, int>;
 
 // <----- rep macro ----->
-#define rep(i, a, b)  for (int i = (a); i < (int)(b); i++)
-#define rrep(i, a, b) for (int i = (a) - 1; i >= (int)(b); i--)
-#define fore(e, x) for (auto &e: x)
+#define rep(var, a, b)  for (auto var = (a); var < (b); var++)
+#define rrep(var, a, b) for (auto var = a - 1; var >= (b); var--)
+#define fore(e, x) for (auto &&e: x)
 #define fore2(k, v, x) for (auto &[k, v]: x)
 
 // <----- other macro ----->
-#define ALL(x) begin((x)), end((x))
+#define ALL(x) begin(x), end(x)
+#define RALL(x) rbegin(x), rend(x)
 #define SIZE(x) ll((x).size())
 
 #define YESNO(n) cout << ((n) ? "YES" : "NO") << endl
