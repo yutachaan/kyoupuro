@@ -83,11 +83,11 @@ template<int MOD> struct modint {
   constexpr bool operator == (const modint& r) const noexcept { return this->val == r.val; }
   constexpr bool operator != (const modint& r) const noexcept { return this->val != r.val; }
   friend constexpr ostream& operator << (ostream &os, const modint<MOD>& x) noexcept { return os << x.val; }
-  friend constexpr modint<MOD> modpow(const modint<MOD> &a, ll n) noexcept {
+  constexpr modint<MOD> modpow(ll n) noexcept {
       if (n == 0) return 1;
-      auto t = modpow(a, n / 2);
-      t = t * t;
-      if (n & 1) t = t * a;
+      auto t = modpow(n / 2);
+      t *= t;
+      if (n & 1) t *= modint(*this);
       return t;
   }
 };
